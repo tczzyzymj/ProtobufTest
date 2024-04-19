@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+enum MainMsgId{
+    Invalid = 0;
+    HeatBeat = 1;
+}
+
+enum SubMsgId{
+    NotValid = 0;
+}
