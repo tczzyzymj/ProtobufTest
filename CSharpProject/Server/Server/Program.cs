@@ -2,21 +2,60 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            MsgHandler _msg = new MsgHandler();
+            ServerProcessor _serverProcessor = new ServerProcessor();
 
-            if (!_msg.Init())
+            if (!_serverProcessor.Init())
             {
                 Console.WriteLine("初始化失败，请检查");
+
                 return;
             }
 
             bool _process = true;
 
+            Task.Run(
+                () =>
+                {
+                    while (_process)
+                    {
+                        _serverProcessor.TryAcceptClient();
+                    }
+                }
+            );
+
+            Task.Run(
+                () =>
+                {
+                    while (_process)
+                    {
+                        _serverProcessor.HandleMsg();
+                    }
+                }
+            );
+
+            Task.Run(
+                async () =>
+                {
+                    while (_process)
+                    {
+                        _serverProcessor.SendMsg();
+
+                        await Task.Delay(2000);
+                    }
+                }
+            );
+
             while (_process)
             {
-                // TODO : 这里处理消息相关
+                ConsoleKeyInfo _keyInfo = Console.ReadKey();
+
+                if (_keyInfo.Key == ConsoleKey.Escape)
+                {
+                    _process = false;
+                    break;
+                }
             }
 
             Console.WriteLine("Hello, World!");

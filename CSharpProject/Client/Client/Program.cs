@@ -4,20 +4,57 @@
     {
         private static void Main(string[] args)
         {
-            MsgHandler _msgHandler = new MsgHandler();
+            NetProcessor _netProcessor = new NetProcessor();
 
-            if (!_msgHandler.Init())
+            if (!_netProcessor.Init())
             {
                 return;
             }
 
-            Console.WriteLine("Hello, World!");
-
             bool _process = true;
 
-            while (_process)
+            try
             {
-                // todo : 这里处理消息
+                Task _taskForHandle = Task.Run(
+                    () =>
+                    {
+                        while (_process)
+                        {
+                            _netProcessor.HandleMsg();
+                        }
+                    }
+                );
+
+                Task _taskForSend = Task.Run(
+                    async () =>
+                    {
+                        while (_process)
+                        {
+                            _netProcessor.SendMsg();
+
+                            await Task.Delay(2000);
+                        }
+                    }
+                );
+
+                while (_process)
+                {
+                    ConsoleKeyInfo _keyInfo = Console.ReadKey();
+
+                    if (_keyInfo.Key == ConsoleKey.Escape)
+                    {
+                        _process = false;
+                        break;
+                    }
+                }
+            }
+            catch (Exception _exception)
+            {
+                Console.WriteLine(_exception);
+            }
+            finally
+            {
+                _netProcessor.Close();
             }
         }
     }
