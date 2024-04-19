@@ -22,12 +22,12 @@ public static partial class CoreReflection {
   static CoreReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "ChVQcm90b0ZpbGVzL0NvcmUucHJvdG8iGgoHVGVzdE1zZxIPCgdDb250ZW50",
-          "GAEgASgJYgZwcm90bzM="));
+          "ChVQcm90b0ZpbGVzL0NvcmUucHJvdG8iGQoGTmV0TXNnEg8KB0NvbnRlbnQY",
+          "ASABKAliBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::TestMsg), global::TestMsg.Parser, new[]{ "Content" }, null, null, null, null)
+          new pbr::GeneratedClrTypeInfo(typeof(global::NetMsg), global::NetMsg.Parser, new[]{ "Content" }, null, null, null, null)
         }));
   }
   #endregion
@@ -35,16 +35,16 @@ public static partial class CoreReflection {
 }
 #region Messages
 [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-public sealed partial class TestMsg : pb::IMessage<TestMsg>
+public sealed partial class NetMsg : pb::IMessage<NetMsg>
 #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     , pb::IBufferMessage
 #endif
 {
-  private static readonly pb::MessageParser<TestMsg> _parser = new pb::MessageParser<TestMsg>(() => new TestMsg());
+  private static readonly pb::MessageParser<NetMsg> _parser = new pb::MessageParser<NetMsg>(() => new NetMsg());
   private pb::UnknownFieldSet _unknownFields;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public static pb::MessageParser<TestMsg> Parser { get { return _parser; } }
+  public static pb::MessageParser<NetMsg> Parser { get { return _parser; } }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -60,7 +60,7 @@ public sealed partial class TestMsg : pb::IMessage<TestMsg>
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public TestMsg() {
+  public NetMsg() {
     OnConstruction();
   }
 
@@ -68,15 +68,15 @@ public sealed partial class TestMsg : pb::IMessage<TestMsg>
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public TestMsg(TestMsg other) : this() {
+  public NetMsg(NetMsg other) : this() {
     content_ = other.content_;
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public TestMsg Clone() {
-    return new TestMsg(this);
+  public NetMsg Clone() {
+    return new NetMsg(this);
   }
 
   /// <summary>Field number for the "Content" field.</summary>
@@ -94,12 +94,12 @@ public sealed partial class TestMsg : pb::IMessage<TestMsg>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public override bool Equals(object other) {
-    return Equals(other as TestMsg);
+    return Equals(other as NetMsg);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public bool Equals(TestMsg other) {
+  public bool Equals(NetMsg other) {
     if (ReferenceEquals(other, null)) {
       return false;
     }
@@ -172,7 +172,7 @@ public sealed partial class TestMsg : pb::IMessage<TestMsg>
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public void MergeFrom(TestMsg other) {
+  public void MergeFrom(NetMsg other) {
     if (other == null) {
       return;
     }

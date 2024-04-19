@@ -49,9 +49,9 @@ struct TableStruct_ProtoFiles_2fCore_2eproto {
 };
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_ProtoFiles_2fCore_2eproto;
-class NetMessage;
-struct NetMessageDefaultTypeInternal;
-extern NetMessageDefaultTypeInternal _NetMessage_default_instance_;
+class NetMsg;
+struct NetMsgDefaultTypeInternal;
+extern NetMsgDefaultTypeInternal _NetMsg_default_instance_;
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
@@ -63,23 +63,23 @@ namespace protobuf {
 
 // -------------------------------------------------------------------
 
-class NetMessage final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:NetMessage) */ {
+class NetMsg final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:NetMsg) */ {
  public:
-  inline NetMessage() : NetMessage(nullptr) {}
-  ~NetMessage() override;
+  inline NetMsg() : NetMsg(nullptr) {}
+  ~NetMsg() override;
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR NetMessage(
+  explicit PROTOBUF_CONSTEXPR NetMsg(
       ::google::protobuf::internal::ConstantInitialized);
 
-  inline NetMessage(const NetMessage& from) : NetMessage(nullptr, from) {}
-  inline NetMessage(NetMessage&& from) noexcept
-      : NetMessage(nullptr, std::move(from)) {}
-  inline NetMessage& operator=(const NetMessage& from) {
+  inline NetMsg(const NetMsg& from) : NetMsg(nullptr, from) {}
+  inline NetMsg(NetMsg&& from) noexcept
+      : NetMsg(nullptr, std::move(from)) {}
+  inline NetMsg& operator=(const NetMsg& from) {
     CopyFrom(from);
     return *this;
   }
-  inline NetMessage& operator=(NetMessage&& from) noexcept {
+  inline NetMsg& operator=(NetMsg&& from) noexcept {
     if (this == &from) return *this;
     if (GetArena() == from.GetArena()
 #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -111,16 +111,16 @@ class NetMessage final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const NetMessage& default_instance() {
+  static const NetMsg& default_instance() {
     return *internal_default_instance();
   }
-  static inline const NetMessage* internal_default_instance() {
-    return reinterpret_cast<const NetMessage*>(
-        &_NetMessage_default_instance_);
+  static inline const NetMsg* internal_default_instance() {
+    return reinterpret_cast<const NetMsg*>(
+        &_NetMsg_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 0;
-  friend void swap(NetMessage& a, NetMessage& b) { a.Swap(&b); }
-  inline void Swap(NetMessage* other) {
+  friend void swap(NetMsg& a, NetMsg& b) { a.Swap(&b); }
+  inline void Swap(NetMsg* other) {
     if (other == this) return;
 #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetArena() != nullptr && GetArena() == other->GetArena()) {
@@ -132,7 +132,7 @@ class NetMessage final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(NetMessage* other) {
+  void UnsafeArenaSwap(NetMsg* other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -140,13 +140,13 @@ class NetMessage final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  NetMessage* New(::google::protobuf::Arena* arena = nullptr) const final {
-    return ::google::protobuf::Message::DefaultConstruct<NetMessage>(arena);
+  NetMsg* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return ::google::protobuf::Message::DefaultConstruct<NetMsg>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const NetMessage& from);
+  void CopyFrom(const NetMsg& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const NetMessage& from) { NetMessage::MergeImpl(*this, from); }
+  void MergeFrom(const NetMsg& from) { NetMsg::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(
@@ -167,16 +167,16 @@ class NetMessage final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* arena);
   void SharedDtor();
-  void InternalSwap(NetMessage* other);
+  void InternalSwap(NetMsg* other);
  private:
   friend class ::google::protobuf::internal::AnyMetadata;
-  static ::absl::string_view FullMessageName() { return "NetMessage"; }
+  static ::absl::string_view FullMessageName() { return "NetMsg"; }
 
  protected:
-  explicit NetMessage(::google::protobuf::Arena* arena);
-  NetMessage(::google::protobuf::Arena* arena, const NetMessage& from);
-  NetMessage(::google::protobuf::Arena* arena, NetMessage&& from) noexcept
-      : NetMessage(arena) {
+  explicit NetMsg(::google::protobuf::Arena* arena);
+  NetMsg(::google::protobuf::Arena* arena, const NetMsg& from);
+  NetMsg(::google::protobuf::Arena* arena, NetMsg&& from) noexcept
+      : NetMsg(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::Message::ClassData* GetClassData() const final;
@@ -187,35 +187,35 @@ class NetMessage final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kMessageFieldNumber = 1,
+    kContentFieldNumber = 1,
   };
-  // string message = 1;
-  void clear_message() ;
-  const std::string& message() const;
+  // string Content = 1;
+  void clear_content() ;
+  const std::string& content() const;
   template <typename Arg_ = const std::string&, typename... Args_>
-  void set_message(Arg_&& arg, Args_... args);
-  std::string* mutable_message();
-  PROTOBUF_NODISCARD std::string* release_message();
-  void set_allocated_message(std::string* value);
+  void set_content(Arg_&& arg, Args_... args);
+  std::string* mutable_content();
+  PROTOBUF_NODISCARD std::string* release_content();
+  void set_allocated_content(std::string* value);
 
   private:
-  const std::string& _internal_message() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_message(
+  const std::string& _internal_content() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_content(
       const std::string& value);
-  std::string* _internal_mutable_message();
+  std::string* _internal_mutable_content();
 
   public:
-  // @@protoc_insertion_point(class_scope:NetMessage)
+  // @@protoc_insertion_point(class_scope:NetMsg)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       0, 1, 0,
-      26, 2>
+      22, 2>
       _table_;
 
   static constexpr const void* _raw_default_instance_ =
-      &_NetMessage_default_instance_;
+      &_NetMsg_default_instance_;
 
   friend class ::google::protobuf::MessageLite;
   friend class ::google::protobuf::Arena;
@@ -230,8 +230,8 @@ class NetMessage final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena);
     inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
                           ::google::protobuf::Arena* arena, const Impl_& from,
-                          const NetMessage& from_msg);
-    ::google::protobuf::internal::ArenaStringPtr message_;
+                          const NetMsg& from_msg);
+    ::google::protobuf::internal::ArenaStringPtr content_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -253,56 +253,56 @@ class NetMessage final : public ::google::protobuf::Message
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
-// NetMessage
+// NetMsg
 
-// string message = 1;
-inline void NetMessage::clear_message() {
+// string Content = 1;
+inline void NetMsg::clear_content() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.ClearToEmpty();
+  _impl_.content_.ClearToEmpty();
 }
-inline const std::string& NetMessage::message() const
+inline const std::string& NetMsg::content() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:NetMessage.message)
-  return _internal_message();
+  // @@protoc_insertion_point(field_get:NetMsg.Content)
+  return _internal_content();
 }
 template <typename Arg_, typename... Args_>
-inline PROTOBUF_ALWAYS_INLINE void NetMessage::set_message(Arg_&& arg,
+inline PROTOBUF_ALWAYS_INLINE void NetMsg::set_content(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:NetMessage.message)
+  _impl_.content_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:NetMsg.Content)
 }
-inline std::string* NetMessage::mutable_message() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  std::string* _s = _internal_mutable_message();
-  // @@protoc_insertion_point(field_mutable:NetMessage.message)
+inline std::string* NetMsg::mutable_content() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_content();
+  // @@protoc_insertion_point(field_mutable:NetMsg.Content)
   return _s;
 }
-inline const std::string& NetMessage::_internal_message() const {
+inline const std::string& NetMsg::_internal_content() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.message_.Get();
+  return _impl_.content_.Get();
 }
-inline void NetMessage::_internal_set_message(const std::string& value) {
+inline void NetMsg::_internal_set_content(const std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.Set(value, GetArena());
+  _impl_.content_.Set(value, GetArena());
 }
-inline std::string* NetMessage::_internal_mutable_message() {
+inline std::string* NetMsg::_internal_mutable_content() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _impl_.message_.Mutable( GetArena());
+  return _impl_.content_.Mutable( GetArena());
 }
-inline std::string* NetMessage::release_message() {
+inline std::string* NetMsg::release_content() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:NetMessage.message)
-  return _impl_.message_.Release();
+  // @@protoc_insertion_point(field_release:NetMsg.Content)
+  return _impl_.content_.Release();
 }
-inline void NetMessage::set_allocated_message(std::string* value) {
+inline void NetMsg::set_allocated_content(std::string* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.message_.SetAllocated(value, GetArena());
+  _impl_.content_.SetAllocated(value, GetArena());
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-        if (_impl_.message_.IsDefault()) {
-          _impl_.message_.Set("", GetArena());
+        if (_impl_.content_.IsDefault()) {
+          _impl_.content_.Set("", GetArena());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:NetMessage.message)
+  // @@protoc_insertion_point(field_set_allocated:NetMsg.Content)
 }
 
 #ifdef __GNUC__

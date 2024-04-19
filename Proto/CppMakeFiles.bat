@@ -14,7 +14,7 @@ set OUT_LANG=cpp
 set OUT_DIR=./CppFiles
  
 :: 循环删除目标目录的文件
-for %%f in (%OUT_DIR%\*.*) do (
+for %%f in (%OUT_DIR%\*) do (
     del /s /q "%%f"
 )
 

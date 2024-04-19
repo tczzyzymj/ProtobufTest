@@ -31,15 +31,15 @@ static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
 static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 const char descriptor_table_protodef_ProtoFiles_2fDefine_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\027ProtoFiles/Define.proto*$\n\007MainMsg\022\013\n\007"
-    "Invalid\020\000\022\014\n\010HeadBeat\020\001*\030\n\010SubMsgID\022\014\n\010N"
-    "otvalid\020\000b\006proto3"
+    "\n\027ProtoFiles/Define.proto*&\n\tMainMsgId\022\013"
+    "\n\007Invalid\020\000\022\014\n\010HeatBeat\020\001*\030\n\010SubMsgId\022\014\n"
+    "\010NotValid\020\000b\006proto3"
 };
 static ::absl::once_flag descriptor_table_ProtoFiles_2fDefine_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_ProtoFiles_2fDefine_2eproto = {
     false,
     false,
-    97,
+    99,
     descriptor_table_protodef_ProtoFiles_2fDefine_2eproto,
     "ProtoFiles/Define.proto",
     &descriptor_table_ProtoFiles_2fDefine_2eproto_once,
@@ -52,22 +52,22 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_ProtoFiles_2fD
     file_level_enum_descriptors_ProtoFiles_2fDefine_2eproto,
     file_level_service_descriptors_ProtoFiles_2fDefine_2eproto,
 };
-const ::google::protobuf::EnumDescriptor* MainMsg_descriptor() {
+const ::google::protobuf::EnumDescriptor* MainMsgId_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_ProtoFiles_2fDefine_2eproto);
   return file_level_enum_descriptors_ProtoFiles_2fDefine_2eproto[0];
 }
-PROTOBUF_CONSTINIT const uint32_t MainMsg_internal_data_[] = {
+PROTOBUF_CONSTINIT const uint32_t MainMsgId_internal_data_[] = {
     131072u, 0u, };
-bool MainMsg_IsValid(int value) {
+bool MainMsgId_IsValid(int value) {
   return 0 <= value && value <= 1;
 }
-const ::google::protobuf::EnumDescriptor* SubMsgID_descriptor() {
+const ::google::protobuf::EnumDescriptor* SubMsgId_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_ProtoFiles_2fDefine_2eproto);
   return file_level_enum_descriptors_ProtoFiles_2fDefine_2eproto[1];
 }
-PROTOBUF_CONSTINIT const uint32_t SubMsgID_internal_data_[] = {
+PROTOBUF_CONSTINIT const uint32_t SubMsgId_internal_data_[] = {
     65536u, 0u, };
-bool SubMsgID_IsValid(int value) {
+bool SubMsgId_IsValid(int value) {
   return 0 <= value && value <= 0;
 }
 // @@protoc_insertion_point(namespace_scope)

@@ -53,70 +53,70 @@ namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
-enum MainMsg : int {
+enum MainMsgId : int {
   Invalid = 0,
-  HeadBeat = 1,
-  MainMsg_INT_MIN_SENTINEL_DO_NOT_USE_ =
+  HeatBeat = 1,
+  MainMsgId_INT_MIN_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::min(),
-  MainMsg_INT_MAX_SENTINEL_DO_NOT_USE_ =
+  MainMsgId_INT_MAX_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::max(),
 };
 
-bool MainMsg_IsValid(int value);
-extern const uint32_t MainMsg_internal_data_[];
-constexpr MainMsg MainMsg_MIN = static_cast<MainMsg>(0);
-constexpr MainMsg MainMsg_MAX = static_cast<MainMsg>(1);
-constexpr int MainMsg_ARRAYSIZE = 1 + 1;
+bool MainMsgId_IsValid(int value);
+extern const uint32_t MainMsgId_internal_data_[];
+constexpr MainMsgId MainMsgId_MIN = static_cast<MainMsgId>(0);
+constexpr MainMsgId MainMsgId_MAX = static_cast<MainMsgId>(1);
+constexpr int MainMsgId_ARRAYSIZE = 1 + 1;
 const ::google::protobuf::EnumDescriptor*
-MainMsg_descriptor();
+MainMsgId_descriptor();
 template <typename T>
-const std::string& MainMsg_Name(T value) {
-  static_assert(std::is_same<T, MainMsg>::value ||
+const std::string& MainMsgId_Name(T value) {
+  static_assert(std::is_same<T, MainMsgId>::value ||
                     std::is_integral<T>::value,
-                "Incorrect type passed to MainMsg_Name().");
-  return MainMsg_Name(static_cast<MainMsg>(value));
+                "Incorrect type passed to MainMsgId_Name().");
+  return MainMsgId_Name(static_cast<MainMsgId>(value));
 }
 template <>
-inline const std::string& MainMsg_Name(MainMsg value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<MainMsg_descriptor,
+inline const std::string& MainMsgId_Name(MainMsgId value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<MainMsgId_descriptor,
                                                  0, 1>(
       static_cast<int>(value));
 }
-inline bool MainMsg_Parse(absl::string_view name, MainMsg* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<MainMsg>(
-      MainMsg_descriptor(), name, value);
+inline bool MainMsgId_Parse(absl::string_view name, MainMsgId* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<MainMsgId>(
+      MainMsgId_descriptor(), name, value);
 }
-enum SubMsgID : int {
-  Notvalid = 0,
-  SubMsgID_INT_MIN_SENTINEL_DO_NOT_USE_ =
+enum SubMsgId : int {
+  NotValid = 0,
+  SubMsgId_INT_MIN_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::min(),
-  SubMsgID_INT_MAX_SENTINEL_DO_NOT_USE_ =
+  SubMsgId_INT_MAX_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::max(),
 };
 
-bool SubMsgID_IsValid(int value);
-extern const uint32_t SubMsgID_internal_data_[];
-constexpr SubMsgID SubMsgID_MIN = static_cast<SubMsgID>(0);
-constexpr SubMsgID SubMsgID_MAX = static_cast<SubMsgID>(0);
-constexpr int SubMsgID_ARRAYSIZE = 0 + 1;
+bool SubMsgId_IsValid(int value);
+extern const uint32_t SubMsgId_internal_data_[];
+constexpr SubMsgId SubMsgId_MIN = static_cast<SubMsgId>(0);
+constexpr SubMsgId SubMsgId_MAX = static_cast<SubMsgId>(0);
+constexpr int SubMsgId_ARRAYSIZE = 0 + 1;
 const ::google::protobuf::EnumDescriptor*
-SubMsgID_descriptor();
+SubMsgId_descriptor();
 template <typename T>
-const std::string& SubMsgID_Name(T value) {
-  static_assert(std::is_same<T, SubMsgID>::value ||
+const std::string& SubMsgId_Name(T value) {
+  static_assert(std::is_same<T, SubMsgId>::value ||
                     std::is_integral<T>::value,
-                "Incorrect type passed to SubMsgID_Name().");
-  return SubMsgID_Name(static_cast<SubMsgID>(value));
+                "Incorrect type passed to SubMsgId_Name().");
+  return SubMsgId_Name(static_cast<SubMsgId>(value));
 }
 template <>
-inline const std::string& SubMsgID_Name(SubMsgID value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<SubMsgID_descriptor,
+inline const std::string& SubMsgId_Name(SubMsgId value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<SubMsgId_descriptor,
                                                  0, 0>(
       static_cast<int>(value));
 }
-inline bool SubMsgID_Parse(absl::string_view name, SubMsgID* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<SubMsgID>(
-      SubMsgID_descriptor(), name, value);
+inline bool SubMsgId_Parse(absl::string_view name, SubMsgId* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<SubMsgId>(
+      SubMsgId_descriptor(), name, value);
 }
 
 // ===================================================================
@@ -146,16 +146,16 @@ namespace google {
 namespace protobuf {
 
 template <>
-struct is_proto_enum<::MainMsg> : std::true_type {};
+struct is_proto_enum<::MainMsgId> : std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor<::MainMsg>() {
-  return ::MainMsg_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor<::MainMsgId>() {
+  return ::MainMsgId_descriptor();
 }
 template <>
-struct is_proto_enum<::SubMsgID> : std::true_type {};
+struct is_proto_enum<::SubMsgId> : std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor<::SubMsgID>() {
-  return ::SubMsgID_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor<::SubMsgId>() {
+  return ::SubMsgId_descriptor();
 }
 
 }  // namespace protobuf
