@@ -12,11 +12,11 @@ set OUT_LANG=csharp
  
 :: 设置目标目录
 set OUT_DIR=./CsharpFiles
- 
+
+set RELATE_DIR=%~dp0
+
 :: 循环删除目标目录的文件和文件夹
-for %%f in (%OUT_DIR%\*) do (
-    del /s /q "%%f"
-)
+del /s /q "%RELATE_DIR%\%OUT_DIR%\*.*"
 
 set ANY_ERROR=0
 
