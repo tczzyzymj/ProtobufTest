@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
  
 :: 设置Protobuf编译器的路径
-set PROTOC_PATH=protoc.exe
+set PROTOC_PATH=protoc
  
 :: 设置Protobuf消息定义文件的目录
 set PROTO_DIR=ProtoFiles
