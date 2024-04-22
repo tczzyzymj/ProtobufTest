@@ -1,10 +1,11 @@
 syntax = "proto3";
 
-enum MainMsgId{
+enum MsgMainIdEnum{
     Invalid = 0;
     HeatBeat = 1;
+    DailyAsk = 2;
 }
 
-enum SubMsgId{
-    NotValid = 0;
+enum MsgSubIdEnum{
+    NoSpecific = 0;
 }

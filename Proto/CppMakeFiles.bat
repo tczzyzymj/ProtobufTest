@@ -31,7 +31,7 @@ set ANY_ERROR=0
 
 :: 循环遍历目录下的所有.proto文件
 for %%f in (%PROTO_DIR%\*.proto) do (
-    %PROTOC_PATH% %%f --%OUT_LANG%_out=%TEMP_OUT_DIR%
+    %PROTOC_PATH% -I=%PROTO_DIR% --%OUT_LANG%_out=%OUT_DIR% %%f
     if !ERRORLEVEL! neq 0 (
         set ANY_ERROR=1
     )

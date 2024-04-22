@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Google.Protobuf;
 
 namespace Client
 {
@@ -8,10 +9,10 @@ namespace Client
     {
         private const    int    mBufferSize = 1024;
         private readonly string mIPAddress  = "127.0.0.1";
+        private          int    mAskCount;
 
         private IPEndPoint mIPEndPoint;
         private Socket?    mSocket;
-        private int        mTempCount;
 
         public bool Init()
         {
@@ -71,7 +72,7 @@ namespace Client
             }
         }
 
-        public void SendMsg()
+        public void SendHearBeat()
         {
             if ((mSocket == null) || !mSocket.Connected)
             {
@@ -82,16 +83,52 @@ namespace Client
 
             try
             {
-                ++mTempCount;
-                string _msg    = "今天是 : " + mTempCount;
-                byte[] _buffer = Encoding.UTF8.GetBytes(_msg);
-                mSocket.Send(_buffer);
-                Console.WriteLine($"客户端发送数据 : {_msg}");
+                //{
+                //    SendMsg(MsgMainIdEnum.HeatBeat, MsgSubIdEnum.NoSpecific, null);
+                //}
+
+                {
+                    ++mAskCount;
+                    MsgDailyAsk _msg = new MsgDailyAsk();
+                    _msg.Content = $"这是第 {mAskCount} 次询问";
+                    SendMsg(MsgMainIdEnum.DailyAsk, MsgSubIdEnum.NoSpecific, _msg);
+                }
             }
             catch (Exception _exception)
             {
                 Console.WriteLine(_exception);
             }
+        }
+
+        public void SendMsg(MsgMainIdEnum mainIdEnum, MsgSubIdEnum subIdEnum, IMessage? targetMsg)
+        {
+            if (mSocket == null)
+            {
+                Console.WriteLine("无连接，请检查!");
+
+                return;
+            }
+
+            NetMsg _msg = new NetMsg { MsgMainID = mainIdEnum, MsgSubID = subIdEnum };
+
+            if (targetMsg != null)
+            {
+                _msg.MsgContent = targetMsg.ToByteString();
+            }
+
+            byte[] _msgBuffer   = _msg.ToByteArray();
+            byte[] _finalBuffer = new byte[_msgBuffer.Length + 4];
+
+            using (MemoryStream _ms = new MemoryStream(_finalBuffer))
+            {
+                byte[] _lengthBytes = BitConverter.GetBytes(_msgBuffer.Length);
+                _ms.Write(_lengthBytes);
+                _ms.Write(_msgBuffer);
+            }
+
+            mSocket.Send(_finalBuffer);
+
+            Console.WriteLine($"发送消息，Main ID : {mainIdEnum}, SubID : {subIdEnum}, Content : {targetMsg}");
         }
 
         public void Close()

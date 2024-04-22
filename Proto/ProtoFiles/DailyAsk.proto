@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+message MsgDailyAsk{
+    string Content=1;
+}

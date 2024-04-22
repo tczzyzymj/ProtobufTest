@@ -15,7 +15,7 @@
 
             try
             {
-                Task _taskForHandle = Task.Run(
+                Task.Run(
                     () =>
                     {
                         while (_process)
@@ -25,14 +25,14 @@
                     }
                 );
 
-                Task _taskForSend = Task.Run(
+                Task.Run(
                     async () =>
                     {
                         while (_process)
                         {
-                            _netProcessor.SendMsg();
+                            _netProcessor.SendHearBeat();
 
-                            await Task.Delay(2000);
+                            await Task.Delay(1000);
                         }
                     }
                 );
@@ -44,6 +44,7 @@
                     if (_keyInfo.Key == ConsoleKey.Escape)
                     {
                         _process = false;
+
                         break;
                     }
                 }

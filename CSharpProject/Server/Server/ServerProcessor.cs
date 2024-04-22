@@ -1,24 +1,31 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Google.Protobuf;
 
 namespace Server
 {
     public class ServerProcessor
     {
-        private const int mBufferSize = 2046;
+        private const    int                        mBufferSize      = 2046;
+        private readonly byte[]                     mBuffer          = new byte[mBufferSize];
         private readonly Dictionary<string, Socket> mClientSocketMap = new Dictionary<string, Socket>();
-        private readonly int mPort = 9117;
-        private readonly byte[] mBuffer = new byte[mBufferSize];
-        private int mCount;
-        private Socket? mServerSocket;
+        private readonly int                        mPort            = 9117;
+        private          int                        mCount;
+        private          int                        mIntSize = 4;
+        private          MemoryStream               mMemoryStream;
+        private          byte[]                     mMsgBufferSizeBuffer;
+        private          Socket?                    mServerSocket;
 
         public bool Init()
         {
-            mServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            mIntSize             = sizeof(int);
+            mMsgBufferSizeBuffer = new byte[mIntSize];
+            mServerSocket        = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            IPAddress _ipAddress = IPAddress.Parse("127.0.0.1");
+            mMemoryStream = new MemoryStream(mBuffer);
+
+            IPAddress  _ipAddress  = IPAddress.Parse("127.0.0.1");
             IPEndPoint _ipEndPoint = new IPEndPoint(_ipAddress, mPort);
 
             // 绑定
@@ -73,13 +80,14 @@ namespace Server
                 }
 
                 Socket[] _clientSocketValueArray = mClientSocketMap.Values.ToArray();
-                string[] _clientSocketKeyArray = mClientSocketMap.Keys.ToArray();
+                string[] _clientSocketKeyArray   = mClientSocketMap.Keys.ToArray();
 
                 for (int _i = _clientSocketKeyArray.Length - 1; _i >= 0; --_i)
                 {
                     if (!_clientSocketValueArray[_i].Connected)
                     {
                         mClientSocketMap.Remove(_clientSocketKeyArray[_i]);
+
                         continue;
                     }
 
@@ -94,19 +102,75 @@ namespace Server
                             continue;
                         }
 
-                        string _clientMsg = Encoding.UTF8.GetString(mBuffer);
-                        Console.WriteLine($"接收客户端 : {_clientSocketKeyArray[_i]} 的消息，内容是：{_clientMsg}");
+                        mMemoryStream.Position = 0;
+
+                        while (true)
+                        {
+                            Array.Clear(mMsgBufferSizeBuffer,0, mIntSize);
+                            mMemoryStream.Read(mMsgBufferSizeBuffer, 0, mIntSize);
+                            int _msgLength = BitConverter.ToInt32(mMsgBufferSizeBuffer);
+
+                            if (_msgLength <= 0)
+                            {
+                                break;
+                            }
+
+                            byte[] _finalMsgBuffer = new byte[_msgLength];
+                            mMemoryStream.Read(_finalMsgBuffer, 0, _msgLength);
+                            NetMsg? _netMsg = NetMsg.Parser.ParseFrom(_finalMsgBuffer);
+
+                            if (_netMsg == null)
+                            {
+                                Console.WriteLine("数据解析错误，请检查!");
+
+                                continue;
+                            }
+
+                            InternalParseMsg(_netMsg.MsgMainID, _netMsg.MsgContent);
+                        }
                     }
                     catch (SocketException _socketException)
                     {
                         Console.WriteLine(_socketException);
                     }
-
                 }
             }
             catch (Exception _exception)
             {
                 Console.WriteLine(_exception);
+            }
+        }
+
+        public void InternalParseMsg(MsgMainIdEnum msgmainId, ByteString byteString)
+        {
+            switch (msgmainId)
+            {
+                case MsgMainIdEnum.Invalid:
+                {
+                    Console.WriteLine("协议转换出错，请检查！");
+                    break;
+                }
+                case MsgMainIdEnum.HeatBeat:
+                {
+                    Console.WriteLine("心跳包");
+                    break;
+                }
+                case MsgMainIdEnum.DailyAsk:
+                {
+                    MsgDailyAsk _msg = MsgDailyAsk.Parser.ParseFrom(byteString);
+
+                    if (_msg == null)
+                    {
+                        Console.WriteLine("协议无法解析为 MsgDailyAsk ，请检查");
+                        return;
+                    }
+                    Console.WriteLine(_msg.ToString());
+                    break;
+                }
+                default:
+                {
+                    throw new ArgumentOutOfRangeException(nameof(msgmainId), msgmainId, null);
+                }
             }
         }
 
@@ -117,23 +181,25 @@ namespace Server
                 if (mClientSocketMap.Count < 1)
                 {
                     Console.WriteLine("尝试发送数据，但是没有任何连接");
+
                     return;
                 }
 
                 ++mCount;
 
                 Socket[] _clientSocketValueArray = mClientSocketMap.Values.ToArray();
-                string[] _clientSocketKeyArray = mClientSocketMap.Keys.ToArray();
+                string[] _clientSocketKeyArray   = mClientSocketMap.Keys.ToArray();
 
                 for (int _i = _clientSocketKeyArray.Length - 1; _i >= 0; --_i)
                 {
                     if (!_clientSocketValueArray[_i].Connected)
                     {
                         mClientSocketMap.Remove(_clientSocketKeyArray[_i]);
+
                         continue;
                     }
 
-                    byte[] _buffer = Encoding.UTF8.GetBytes(mCount.ToString());
+                    byte[] _buffer  = Encoding.UTF8.GetBytes(mCount.ToString());
                     string _tempMsg = $"发送数据 : {mCount}, 目标 : {_clientSocketKeyArray[_i]}";
                     _clientSocketValueArray[_i].Send(_buffer);
                     Console.WriteLine(_tempMsg);

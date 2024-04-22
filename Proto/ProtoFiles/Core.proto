@@ -1,5 +1,8 @@
 syntax = "proto3";
+import "Define.proto";
 
 message NetMsg{
-    string Content = 1;
+    MsgMainIdEnum MsgMainID = 1;
+    MsgSubIdEnum MsgSubID = 2;
+    bytes MsgContent = 3;
 }

@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Google.Protobuf">
+      <HintPath>DLL\Google.Protobuf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
