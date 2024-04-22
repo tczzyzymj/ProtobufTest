@@ -35,18 +35,6 @@
                 }
             );
 
-            Task.Run(
-                async () =>
-                {
-                    while (_process)
-                    {
-                        _serverProcessor.SendMsg();
-
-                        await Task.Delay(2000);
-                    }
-                }
-            );
-
             while (_process)
             {
                 ConsoleKeyInfo _keyInfo = Console.ReadKey();

@@ -1,22 +1,21 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using Google.Protobuf;
 
 namespace Server
 {
     public class ServerProcessor
     {
-        private const    int                        mBufferSize      = 2046;
-        private readonly byte[]                     mBuffer          = new byte[mBufferSize];
+        private const    int                        mBufferSize      = 1024;
         private readonly Dictionary<string, Socket> mClientSocketMap = new Dictionary<string, Socket>();
         private readonly int                        mPort            = 9117;
+        private readonly byte[]                     mBuffer          = new byte[mBufferSize];
         private          int                        mCount;
         private          int                        mIntSize = 4;
         private          MemoryStream               mMemoryStream;
         private          byte[]                     mMsgBufferSizeBuffer;
         private          Socket?                    mServerSocket;
-
+        private          int                        mReceiveCount = 0;
         public bool Init()
         {
             mIntSize             = sizeof(int);
@@ -106,7 +105,7 @@ namespace Server
 
                         while (true)
                         {
-                            Array.Clear(mMsgBufferSizeBuffer,0, mIntSize);
+                            Array.Clear(mMsgBufferSizeBuffer, 0, mIntSize);
                             mMemoryStream.Read(mMsgBufferSizeBuffer, 0, mIntSize);
                             int _msgLength = BitConverter.ToInt32(mMsgBufferSizeBuffer);
 
@@ -126,7 +125,7 @@ namespace Server
                                 continue;
                             }
 
-                            InternalParseMsg(_netMsg.MsgMainID, _netMsg.MsgContent);
+                            InternalParseMsg(_netMsg.MsgMainID, _netMsg.MsgContent, _clientSocketValueArray[_i]);
                         }
                     }
                     catch (SocketException _socketException)
@@ -141,30 +140,39 @@ namespace Server
             }
         }
 
-        public void InternalParseMsg(MsgMainIdEnum msgmainId, ByteString byteString)
+        public void InternalParseMsg(MsgMainIdEnum msgmainId, ByteString byteString, Socket targetSocket)
         {
             switch (msgmainId)
             {
                 case MsgMainIdEnum.Invalid:
                 {
                     Console.WriteLine("协议转换出错，请检查！");
+
                     break;
                 }
                 case MsgMainIdEnum.HeatBeat:
                 {
                     Console.WriteLine("心跳包");
+
                     break;
                 }
                 case MsgMainIdEnum.DailyAsk:
                 {
-                    MsgDailyAsk _msg = MsgDailyAsk.Parser.ParseFrom(byteString);
+                    C2SDailyAsk _msg = C2SDailyAsk.Parser.ParseFrom(byteString);
 
                     if (_msg == null)
                     {
                         Console.WriteLine("协议无法解析为 MsgDailyAsk ，请检查");
+
                         return;
                     }
+
                     Console.WriteLine(_msg.ToString());
+                    S2CDailyAsk _replyMsg = new S2CDailyAsk();
+                    ++mReceiveCount;
+                    _replyMsg.Content = $"哟西，已收到 {mReceiveCount} 次";
+                    SendMsg(MsgMainIdEnum.DailyAsk, MsgSubIdEnum.NoSpecific, targetSocket, _replyMsg);
+
                     break;
                 }
                 default:
@@ -174,41 +182,35 @@ namespace Server
             }
         }
 
-        public void SendMsg()
+        public void SendMsg(MsgMainIdEnum mainIdEnum, MsgSubIdEnum subIdEnum, Socket targetSocket, IMessage? targetMsg)
         {
-            try
+            if (targetSocket == null)
             {
-                if (mClientSocketMap.Count < 1)
-                {
-                    Console.WriteLine("尝试发送数据，但是没有任何连接");
+                Console.WriteLine("无连接，请检查!");
 
-                    return;
-                }
-
-                ++mCount;
-
-                Socket[] _clientSocketValueArray = mClientSocketMap.Values.ToArray();
-                string[] _clientSocketKeyArray   = mClientSocketMap.Keys.ToArray();
-
-                for (int _i = _clientSocketKeyArray.Length - 1; _i >= 0; --_i)
-                {
-                    if (!_clientSocketValueArray[_i].Connected)
-                    {
-                        mClientSocketMap.Remove(_clientSocketKeyArray[_i]);
-
-                        continue;
-                    }
-
-                    byte[] _buffer  = Encoding.UTF8.GetBytes(mCount.ToString());
-                    string _tempMsg = $"发送数据 : {mCount}, 目标 : {_clientSocketKeyArray[_i]}";
-                    _clientSocketValueArray[_i].Send(_buffer);
-                    Console.WriteLine(_tempMsg);
-                }
+                return;
             }
-            catch (Exception _exception)
+
+            NetMsg _msg = new NetMsg { MsgMainID = mainIdEnum, MsgSubID = subIdEnum };
+
+            if (targetMsg != null)
             {
-                Console.WriteLine(_exception);
+                _msg.MsgContent = targetMsg.ToByteString();
             }
+
+            byte[] _msgBuffer   = _msg.ToByteArray();
+            byte[] _finalBuffer = new byte[_msgBuffer.Length + 4];
+
+            using (MemoryStream _ms = new MemoryStream(_finalBuffer))
+            {
+                byte[] _lengthBytes = BitConverter.GetBytes(_msgBuffer.Length);
+                _ms.Write(_lengthBytes);
+                _ms.Write(_msgBuffer);
+            }
+
+            targetSocket.Send(_finalBuffer);
+
+            Console.WriteLine($"发送消息，Main ID : {mainIdEnum}, SubID : {subIdEnum}, Content : {targetMsg}");
         }
     }
 }

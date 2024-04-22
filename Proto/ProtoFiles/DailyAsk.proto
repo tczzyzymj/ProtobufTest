@@ -1,5 +1,9 @@
 syntax = "proto3";
 
-message MsgDailyAsk{
+message C2SDailyAsk{
     string Content=1;
+}
+
+message S2CDailyAsk{
+    string Content=2;
 }

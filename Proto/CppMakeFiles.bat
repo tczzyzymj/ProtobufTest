@@ -41,6 +41,13 @@ for %%f in (%TEMP_OUT_DIR%\%PROTO_DIR%\*.*) do (
     move %%f %RELATE_DIR%%OUT_DIR%\%%~nxf
 )
 
+set CLIENT_COPY_DIR=../CppProject/Client/Client/ProtoFiles/
+
+:: 拷贝到 Client
+for %%f in (%OUT_DIR%\*.*) do (
+    copy "%%f" "%CLIENT_COPY_DIR%"
+)
+
 rd /s /q %TEMP_OUT_DIR%
 
 if %ANY_ERROR% == 0 (

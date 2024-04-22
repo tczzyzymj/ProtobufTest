@@ -1,23 +1,28 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using Google.Protobuf;
 
 namespace Client
 {
     public class NetProcessor
     {
-        private const    int    mBufferSize = 1024;
-        private readonly string mIPAddress  = "127.0.0.1";
-        private          int    mAskCount;
-
-        private IPEndPoint mIPEndPoint;
-        private Socket?    mSocket;
+        private const    int          mBufferSize = 1024;
+        private readonly byte[]       mBuffer     = new byte[mBufferSize];
+        private readonly string       mIPAddress  = "127.0.0.1";
+        private          int          mAskCount;
+        private          int          mIntSize = 4;
+        private          IPEndPoint   mIPEndPoint;
+        private          MemoryStream mMemoryStream;
+        private          byte[]       mMsgBufferSizeBuffer;
+        private          Socket?      mSocket;
 
         public bool Init()
         {
-            mSocket     = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            mIPEndPoint = new IPEndPoint(IPAddress.Parse(mIPAddress), 9117);
+            mIntSize             = sizeof(int);
+            mMsgBufferSizeBuffer = new byte[mIntSize];
+            mMemoryStream        = new MemoryStream(mBuffer);
+            mSocket              = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            mIPEndPoint          = new IPEndPoint(IPAddress.Parse(mIPAddress), 9117);
 
             try
             {
@@ -45,16 +50,41 @@ namespace Client
 
             try
             {
-                byte[] _buffer = new byte[mBufferSize];
-
                 try
                 {
-                    int _length = mSocket.Receive(_buffer);
+                    Array.Clear(mBuffer, 0, mBufferSize);
+                    int _length = mSocket.Receive(mBuffer);
 
-                    if (_length > 0)
+                    if (_length <= 0)
                     {
-                        string _serverMsgStr = Encoding.UTF8.GetString(_buffer);
-                        Console.WriteLine("接收到数据 : " + _serverMsgStr);
+                        return;
+                    }
+
+                    mMemoryStream.Position = 0;
+
+                    while (true)
+                    {
+                        Array.Clear(mMsgBufferSizeBuffer, 0, mIntSize);
+                        mMemoryStream.Read(mMsgBufferSizeBuffer, 0, mIntSize);
+                        int _msgLength = BitConverter.ToInt32(mMsgBufferSizeBuffer);
+
+                        if (_msgLength <= 0)
+                        {
+                            break;
+                        }
+
+                        byte[] _finalMsgBuffer = new byte[_msgLength];
+                        mMemoryStream.Read(_finalMsgBuffer, 0, _msgLength);
+                        NetMsg? _netMsg = NetMsg.Parser.ParseFrom(_finalMsgBuffer);
+
+                        if (_netMsg == null)
+                        {
+                            Console.WriteLine("数据解析错误，请检查!");
+
+                            continue;
+                        }
+
+                        InternalParseMsg(_netMsg.MsgMainID, _netMsg.MsgContent);
                     }
                 }
                 catch (SocketException _socketException)
@@ -63,6 +93,10 @@ namespace Client
                     {
                         // 远程连接断开了
                         Console.WriteLine(_socketException);
+                    }
+                    else
+                    {
+                        Console.WriteLine(_socketException.ToString());
                     }
                 }
             }
@@ -89,7 +123,7 @@ namespace Client
 
                 {
                     ++mAskCount;
-                    MsgDailyAsk _msg = new MsgDailyAsk();
+                    C2SDailyAsk _msg = new C2SDailyAsk();
                     _msg.Content = $"这是第 {mAskCount} 次询问";
                     SendMsg(MsgMainIdEnum.DailyAsk, MsgSubIdEnum.NoSpecific, _msg);
                 }
@@ -136,6 +170,31 @@ namespace Client
             if (mSocket != null)
             {
                 mSocket.Close();
+            }
+        }
+
+        private void InternalParseMsg(MsgMainIdEnum msgmainId, ByteString byteString)
+        {
+            switch (msgmainId)
+            {
+                case MsgMainIdEnum.Invalid:
+                {
+                    break;
+                }
+                case MsgMainIdEnum.HeatBeat:
+                {
+                    break;
+                }
+                case MsgMainIdEnum.DailyAsk:
+                {
+                    S2CDailyAsk _replyMsg = S2CDailyAsk.Parser.ParseFrom(byteString);
+                    Console.WriteLine("收到消息 : " + _replyMsg);
+                    break;
+                }
+                default:
+                {
+                    throw new ArgumentOutOfRangeException(nameof(msgmainId), msgmainId, null);
+                }
             }
         }
     }
