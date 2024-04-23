@@ -3,19 +3,30 @@
 
 #include <iostream>
 #include "NetProcessor.h"
+#include "Core.pb.h"
+#include "DailyAsk.pb.h"
+
 int main()
 {
-    NetProcessor* _netProcessor = new NetProcessor();
-    if(!_netProcessor->Init())
-    {
-        std::cout << L"初始化失败，请检查" << std::endl;
-        return -1;
-    }
+    //NetProcessor* _netProcessor = new NetProcessor();
+    //if(!_netProcessor->Init())
+    //{
+    //    std::cout << L"初始化失败，请检查" << std::endl;
+    //    return -1;
+    //}
 
-    while(true)
-    {
-        
-    }
+    //while(true)
+    //{
+    //    
+    //}
+
+    C2SDailyAsk _dailyAsk;
+    _dailyAsk.set_content("今天是个好日子");
+
+    NetMsg _msg;
+    _msg.set_msgmainid(MsgMainIdEnum::DailyAsk);
+
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
