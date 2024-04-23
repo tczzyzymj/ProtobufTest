@@ -84,7 +84,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ExecutablePath>../Client/HeadFiles;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>../Client/HeadFiles;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>../Client/HeadFiles;../Client/ProtoInclude;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -144,10 +144,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
-    <ClCompile Include="SourceFiles\MsgHandler.cpp" />
+    <ClCompile Include="ProtoFiles\Core.pb.cc" />
+    <ClCompile Include="ProtoFiles\DailyAsk.pb.cc" />
+    <ClCompile Include="ProtoFiles\Define.pb.cc" />
+    <ClCompile Include="SourceFiles\NetProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HeadFiles\MsgHandler.h" />
+    <ClInclude Include="HeadFiles\NetProcessor.h" />
+    <ClInclude Include="ProtoFiles\Core.pb.h" />
+    <ClInclude Include="ProtoFiles\DailyAsk.pb.h" />
+    <ClInclude Include="ProtoFiles\Define.pb.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

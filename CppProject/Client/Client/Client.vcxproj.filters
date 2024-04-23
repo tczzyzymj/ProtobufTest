@@ -13,17 +13,38 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ProtoFiles">
+      <UniqueIdentifier>{7b468132-03c3-48be-aef3-8050b8e2d3ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceFiles\MsgHandler.cpp">
+    <ClCompile Include="ProtoFiles\Core.pb.cc">
+      <Filter>ProtoFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="ProtoFiles\DailyAsk.pb.cc">
+      <Filter>ProtoFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="ProtoFiles\Define.pb.cc">
+      <Filter>ProtoFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceFiles\NetProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HeadFiles\MsgHandler.h">
+    <ClInclude Include="ProtoFiles\Core.pb.h">
+      <Filter>ProtoFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="ProtoFiles\DailyAsk.pb.h">
+      <Filter>ProtoFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="ProtoFiles\Define.pb.h">
+      <Filter>ProtoFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadFiles\NetProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
