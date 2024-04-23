@@ -2,10 +2,20 @@
 //
 
 #include <iostream>
-
+#include "NetProcessor.h"
 int main()
 {
-    std::cout << "Hello World!\n";
+    NetProcessor* _netProcessor = new NetProcessor();
+    if(!_netProcessor->Init())
+    {
+        std::cout << L"³õÊ¼»¯Ê§°Ü£¬Çë¼ì²é" << std::endl;
+        return -1;
+    }
+
+    while(true)
+    {
+        
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
