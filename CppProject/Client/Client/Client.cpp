@@ -22,9 +22,41 @@ int main()
 
     C2SDailyAsk _dailyAsk;
     _dailyAsk.set_content("今天是个好日子");
+    std::string _serializeStr = _dailyAsk.SerializeAsString();
+    if(_serializeStr.length() <= 0)
+    {
+        std::cout << L"C2SDailyAsk 序列化出错，请检查" << std::endl;
+        return -1;
+    }
 
     NetMsg _msg;
     _msg.set_msgmainid(MsgMainIdEnum::DailyAsk);
+    _msg.set_msgcontent(_serializeStr);
+
+    std::string _msgStr = _msg.SerializeAsString();
+    if (_msgStr.length() <=0)
+    {
+        std::cout << L"NetMsg 序列化出错，请检查" << std::endl;
+        return -1;
+    }
+
+    NetMsg _receiveMsg;
+    if(!_receiveMsg.ParseFromString(_msgStr))
+    {
+        std::cout << L"NetMsg 反序列化出错，请检查!" << std::endl;
+        return -1;
+    }
+
+    std::cout << "MsgMainID is : " << _receiveMsg.msgmainid() << std::endl;
+
+    C2SDailyAsk _receiveDailyAsk;
+    if(!_receiveDailyAsk.ParseFromString(_receiveMsg.msgcontent()))
+    {
+        std::cout << L"C2SDailyAsk 反序列化失败，请检查！" << std::endl;
+        return -1;
+    }
+
+    std::cout << "序列化消息是：" << _receiveDailyAsk.content() << std::endl;
 
     return 0;
 }
