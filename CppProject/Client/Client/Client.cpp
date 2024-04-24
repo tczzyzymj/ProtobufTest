@@ -2,16 +2,77 @@
 //
 
 #include <iostream>
-#include "NetProcessor.h"
-#include "Core.pb.h"
-#include "DailyAsk.pb.h"
+//#include "NetProcessor.h"
+//#include "Core.pb.h"
+//#include "DailyAsk.pb.h"
+
+bool IsUTF8(const void* pBuffer, int size)
+{
+    bool           IsUTF8 = false;
+    auto           start  = (unsigned char*)pBuffer;
+    unsigned char* end    = (unsigned char*)pBuffer + size;
+    while (start < end)
+    {
+        if (*start < 0x80) // (10000000): å€¼å°äºŽ0x80çš„ä¸ºASCIIå­—ç¬¦ 
+        {
+            start++;
+        }
+        else if (*start < (0xC0)) // (11000000): å€¼ä»‹äºŽ0x80ä¸Ž0xC0ä¹‹é—´çš„ä¸ºæ— æ•ˆUTF-8å­—ç¬¦ 
+        {
+            IsUTF8 = false;
+            break;
+        }
+        else if (*start < (0xE0)) // (11100000): æ­¤èŒƒå›´å†…ä¸º2å­—èŠ‚UTF-8å­—ç¬¦ 
+        {
+            IsUTF8 = true;
+            if (start >= end - 1)
+                break;
+            if ((start[1] & (0xC0)) != 0x80)
+            {
+                IsUTF8 = false;
+                break;
+            }
+            start += 2;
+        }
+        else if (*start < (0xF0)) // (11110000): æ­¤èŒƒå›´å†…ä¸º3å­—èŠ‚UTF-8å­—ç¬¦ 
+        {
+            IsUTF8 = true;
+            if (start >= end - 2)
+                break;
+            if ((start[1] & (0xC0)) != 0x80 || (start[2] & (0xC0)) != 0x80)
+            {
+                IsUTF8 = false;
+                break;
+            }
+            start += 3;
+        }
+        else if (*start < (0xF8)) // (11111000): æ­¤èŒƒå›´å†…ä¸º4å­—èŠ‚UTF-8å­—ç¬¦ 
+        {
+            IsUTF8 = true;
+            if (start >= end - 3)
+                break;
+            if ((start[1] & (0xC0)) != 0x80 || (start[2] & (0xC0)) != 0x80 || (start[3] & (0xC0)) != 0x80)
+            {
+                IsUTF8 = false;
+                break;
+            }
+            start += 4;
+        }
+        else
+        {
+            IsUTF8 = false;
+            break;
+        }
+    }
+    return IsUTF8;
+}
 
 int main()
 {
     //NetProcessor* _netProcessor = new NetProcessor();
     //if(!_netProcessor->Init())
     //{
-    //    std::cout << L"³õÊ¼»¯Ê§°Ü£¬Çë¼ì²é" << std::endl;
+    //    std::cout << L"åˆå§‹åŒ–å¤±è´¥ï¼Œè¯·æ£€æŸ¥" << std::endl;
     //    return -1;
     //}
 
@@ -20,43 +81,59 @@ int main()
     //    
     //}
 
-    C2SDailyAsk _dailyAsk;
-    _dailyAsk.set_content("½ñÌìÊÇ¸öºÃÈÕ×Ó");
-    std::string _serializeStr = _dailyAsk.SerializeAsString();
-    if(_serializeStr.length() <= 0)
-    {
-        std::cout << L"C2SDailyAsk ÐòÁÐ»¯³ö´í£¬Çë¼ì²é" << std::endl;
-        return -1;
-    }
+    std::cout << "å¤©æ°”ä¸é”™å•Š" << std::endl;
+    //std::string _content = "ä½ å¥½ï¼Œä»Šå¤©å¤©æ°”ä¸é”™";
 
-    NetMsg _msg;
-    _msg.set_msgmainid(MsgMainIdEnum::DailyAsk);
-    _msg.set_msgcontent(_serializeStr);
+    //std::cout << _content << std::endl;
 
-    std::string _msgStr = _msg.SerializeAsString();
-    if (_msgStr.length() <=0)
-    {
-        std::cout << L"NetMsg ÐòÁÐ»¯³ö´í£¬Çë¼ì²é" << std::endl;
-        return -1;
-    }
+    //   C2SDailyAsk _dailyAsk;
+    //   std::string _content = "ä½ å¥½ï¼Œä»Šå¤©å¤©æ°”ä¸é”™";
+    //bool _bIsUTF8 = IsUTF8(&_content, _content.length());
+    //if (_bIsUTF8)
+    //{
+    //	std::cout << "true" << std::endl;
+    //}
+    //else
+    //{
+    //	std::cout << "false" << std::endl;
+    //}
 
-    NetMsg _receiveMsg;
-    if(!_receiveMsg.ParseFromString(_msgStr))
-    {
-        std::cout << L"NetMsg ·´ÐòÁÐ»¯³ö´í£¬Çë¼ì²é!" << std::endl;
-        return -1;
-    }
+    //_dailyAsk.set_content(_content);
+    //std::string _serializeStr = _dailyAsk.SerializeAsString();
+    //if(_serializeStr.length() <= 0)
+    //{
+    //    std::cout << "åºåˆ—åŒ–å‡ºé”™" << std::endl;
+    //    return -1;
+    //}
 
-    std::cout << "MsgMainID is : " << _receiveMsg.msgmainid() << std::endl;
+    //NetMsg _msg;
+    //_msg.set_msgmainid(MsgMainIdEnum::DailyAsk);
+    //_msg.set_msgcontent(_serializeStr);
 
-    C2SDailyAsk _receiveDailyAsk;
-    if(!_receiveDailyAsk.ParseFromString(_receiveMsg.msgcontent()))
-    {
-        std::cout << L"C2SDailyAsk ·´ÐòÁÐ»¯Ê§°Ü£¬Çë¼ì²é£¡" << std::endl;
-        return -1;
-    }
+    //std::string _msgStr = _msg.SerializeAsString();
+    //if (_msgStr.length() <=0)
+    //{
+    //    std::cout << "NetMsg åºåˆ—åŒ–å‡ºé”™ï¼Œè¯·æ£€æŸ¥" << std::endl;
+    //    return -1;
+    //}
 
-    std::cout << "ÐòÁÐ»¯ÏûÏ¢ÊÇ£º" << _receiveDailyAsk.content() << std::endl;
+    //NetMsg _receiveMsg;
+    //if(!_receiveMsg.ParseFromString(_msgStr))
+    //{
+    //    std::cout << "NetMsg ååºåˆ—åŒ–å‡ºé”™ï¼Œè¯·æ£€æŸ¥!" << std::endl;
+    //    return -1;
+    //}
+
+    //std::cout << "MsgMainID is : " << _receiveMsg.msgmainid() << std::endl;
+
+    //C2SDailyAsk _receiveDailyAsk;
+    //if(!_receiveDailyAsk.ParseFromString(_receiveMsg.msgcontent()))
+    //{
+    //    std::cout << "C2SDailyAsk ååºåˆ—åŒ–å¤±è´¥ï¼Œè¯·æ£€æŸ¥ï¼" << std::endl;
+    //    return -1;
+    //}
+
+    //std::cout << "åºåˆ—åŒ–æ¶ˆæ¯æ˜¯ï¼š" << _receiveDailyAsk.content() << std::endl;
 
     return 0;
 }
