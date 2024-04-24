@@ -21,4 +21,6 @@ public:
 
 private:
     SOCKET mSocketClient = NULL;
+
+    std::string MyName = "米克";
 };

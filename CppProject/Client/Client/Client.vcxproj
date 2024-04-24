@@ -79,14 +79,14 @@
     <IncludePath>../Client/HeadFiles;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ExecutablePath>../Client/HeadFiles;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>../Client/HeadFiles;../Client/ProtoInclude;../Client/ProtoFiles/;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>../Client/ProtoInclude/Lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <IncludePath>..\Client\HeadFiles;..\Client\ProtoFiles;..\Client\ProtoInclude\/;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>..\Client\ProtoInclude\Lib\$(Configuration);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ExecutablePath>../Client/HeadFiles;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>../Client/HeadFiles;../Client/ProtoInclude;../Client/ProtoFiles/;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>../Client/ProtoInclude/Lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <IncludePath>..\Client\HeadFiles\;..\Client\ProtoFiles\;..\Client\ProtoInclude\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>..\Client\ProtoInclude\Lib\$(Configuration)\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -123,14 +123,20 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../Client/ProtoInclude/DLL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Client\ProtoInclude\$(Configuration)\DLL</AdditionalIncludeDirectories>
+      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../Client/ProtoInclude/DLL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Client\ProtoInclude\DLL\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>abseil_dll.lib;absl_flags_commandlineflag.lib;absl_flags_commandlineflag_internal.lib;absl_flags_config.lib;absl_flags_internal.lib;absl_flags_marshalling.lib;absl_flags_parse.lib;absl_flags_private_handle_accessor.lib;absl_flags_program_name.lib;absl_flags_reflection.lib;absl_flags_usage.lib;absl_flags_usage_internal.lib;absl_log_flags.lib;absl_string_view.lib;libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;utf8_range.lib;utf8_validity.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\$(Configuration)\libprotobuf.dll" "$(OutDir)"
+xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\$(Configuration)\utf8_validity.dll" "$(OutDir)"
+xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\$(Configuration)\abseil_dll.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -140,7 +146,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>PROTOBUF_USE_DLLS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../Client/ProtoInclude/DLL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Client\ProtoInclude\DLL\$(Configuration)\</AdditionalIncludeDirectories>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -150,16 +156,16 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>abseil_dll.lib;absl_flags_commandlineflag.lib;absl_flags_commandlineflag_internal.lib;absl_flags_config.lib;absl_flags_internal.lib;absl_flags_marshalling.lib;absl_flags_parse.lib;absl_flags_private_handle_accessor.lib;absl_flags_program_name.lib;absl_flags_reflection.lib;absl_flags_usage.lib;absl_flags_usage_internal.lib;absl_log_flags.lib;absl_string_view.lib;libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;utf8_range.lib;utf8_validity.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../Client/ProtoInclude/DLL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Client\ProtoInclude\DLL\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <PostBuildEvent>
-      <Command>xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\libprotobuf.dll" "$(OutDir)"
-xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\utf8_validity.dll" "$(OutDir)"
-xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\abseil_dll.dll" "$(OutDir)"
+      <Command>xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\$(Configuration)\libprotobuf.dll" "$(OutDir)"
+xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\$(Configuration)\utf8_validity.dll" "$(OutDir)"
+xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\$(Configuration)\abseil_dll.dll" "$(OutDir)"
 </Command>
     </PostBuildEvent>
     <PreBuildEvent>

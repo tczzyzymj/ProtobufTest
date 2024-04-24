@@ -3,10 +3,9 @@
 bool NetProcessor::Init()
 {
     mSocketClient = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-
     if (INVALID_SOCKET == mSocketClient)
     {
-        std::cout << L"³õÊ¼»¯³ö´í£¬Çë¼ì²é!" << std::endl;
+        std::cout << u8"åˆå§‹åŒ–å‡ºé”™ï¼Œè¯·æ£€æŸ¥!" << std::endl;
         return false;
     }
 
@@ -19,18 +18,18 @@ bool NetProcessor::Init()
 
     if (SOCKET_ERROR == _result)
     {
-        std::cout << L"Á¬½Ó·þÎñÆ÷³ö´í£¬Çë¼ì²é" << std::endl;
+        std::cout << u8"è¿žæŽ¥æœåŠ¡å™¨å‡ºé”™ï¼Œè¯·æ£€æŸ¥" << std::endl;
 
         return false;
     }
 
-    std::cout << L"Á¬½Ó·þÎñÆ÷³É¹¦" << std::endl;
+    std::cout << u8"è¿žæŽ¥æœåŠ¡å™¨æˆåŠŸ" << std::endl;
     std::string _content = "haha";
 
     int _sendReulst = send(mSocketClient, _content.c_str(), static_cast<int>(_content.length()), 0);
     if(SOCKET_ERROR == _sendReulst)
     {
-        std::cout << L"·¢ËÍÐ­Òé³ö´í£¬Çë¼Ù²é" << std::endl;
+        std::cout << u8"å‘é€åè®®å‡ºé”™ï¼Œè¯·å‡æŸ¥" << std::endl;
     }
 
     return true;
