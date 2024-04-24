@@ -19,6 +19,9 @@ int main()
 
     while(true)
     {
+        _netProcessor->HandleMsg();
+
+        //_netProcessor->SendMsg();
     }
 
     return 0;

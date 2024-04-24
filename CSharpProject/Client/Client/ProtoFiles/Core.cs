@@ -22,13 +22,13 @@ public static partial class CoreReflection {
   static CoreReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "CgpDb3JlLnByb3RvGgxEZWZpbmUucHJvdG8iYAoGTmV0TXNnEiEKCU1zZ01h",
-          "aW5JRBgBIAEoDjIOLk1zZ01haW5JZEVudW0SHwoITXNnU3ViSUQYAiABKA4y",
-          "DS5Nc2dTdWJJZEVudW0SEgoKTXNnQ29udGVudBgDIAEoDGIGcHJvdG8z"));
+          "CgpDb3JlLnByb3RvGgxEZWZpbmUucHJvdG8iUQoGTmV0TXNnEiEKCU1zZ01h",
+          "aW5JZBgBIAEoDjIOLk1zZ01haW5JZEVudW0SEAoITXNnU3ViSWQYAiABKAUS",
+          "EgoKTXNnQ29udGVudBgDIAEoDGIGcHJvdG8z"));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { global::DefineReflection.Descriptor, },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::NetMsg), global::NetMsg.Parser, new[]{ "MsgMainID", "MsgSubID", "MsgContent" }, null, null, null, null)
+          new pbr::GeneratedClrTypeInfo(typeof(global::NetMsg), global::NetMsg.Parser, new[]{ "MsgMainId", "MsgSubId", "MsgContent" }, null, null, null, null)
         }));
   }
   #endregion
@@ -70,8 +70,8 @@ public sealed partial class NetMsg : pb::IMessage<NetMsg>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public NetMsg(NetMsg other) : this() {
-    msgMainID_ = other.msgMainID_;
-    msgSubID_ = other.msgSubID_;
+    msgMainId_ = other.msgMainId_;
+    msgSubId_ = other.msgSubId_;
     msgContent_ = other.msgContent_;
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
@@ -82,27 +82,27 @@ public sealed partial class NetMsg : pb::IMessage<NetMsg>
     return new NetMsg(this);
   }
 
-  /// <summary>Field number for the "MsgMainID" field.</summary>
-  public const int MsgMainIDFieldNumber = 1;
-  private global::MsgMainIdEnum msgMainID_ = global::MsgMainIdEnum.Invalid;
+  /// <summary>Field number for the "MsgMainId" field.</summary>
+  public const int MsgMainIdFieldNumber = 1;
+  private global::MsgMainIdEnum msgMainId_ = global::MsgMainIdEnum.Invalid;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public global::MsgMainIdEnum MsgMainID {
-    get { return msgMainID_; }
+  public global::MsgMainIdEnum MsgMainId {
+    get { return msgMainId_; }
     set {
-      msgMainID_ = value;
+      msgMainId_ = value;
     }
   }
 
-  /// <summary>Field number for the "MsgSubID" field.</summary>
-  public const int MsgSubIDFieldNumber = 2;
-  private global::MsgSubIdEnum msgSubID_ = global::MsgSubIdEnum.NoSpecific;
+  /// <summary>Field number for the "MsgSubId" field.</summary>
+  public const int MsgSubIdFieldNumber = 2;
+  private int msgSubId_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public global::MsgSubIdEnum MsgSubID {
-    get { return msgSubID_; }
+  public int MsgSubId {
+    get { return msgSubId_; }
     set {
-      msgSubID_ = value;
+      msgSubId_ = value;
     }
   }
 
@@ -133,8 +133,8 @@ public sealed partial class NetMsg : pb::IMessage<NetMsg>
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if (MsgMainID != other.MsgMainID) return false;
-    if (MsgSubID != other.MsgSubID) return false;
+    if (MsgMainId != other.MsgMainId) return false;
+    if (MsgSubId != other.MsgSubId) return false;
     if (MsgContent != other.MsgContent) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
@@ -143,8 +143,8 @@ public sealed partial class NetMsg : pb::IMessage<NetMsg>
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public override int GetHashCode() {
     int hash = 1;
-    if (MsgMainID != global::MsgMainIdEnum.Invalid) hash ^= MsgMainID.GetHashCode();
-    if (MsgSubID != global::MsgSubIdEnum.NoSpecific) hash ^= MsgSubID.GetHashCode();
+    if (MsgMainId != global::MsgMainIdEnum.Invalid) hash ^= MsgMainId.GetHashCode();
+    if (MsgSubId != 0) hash ^= MsgSubId.GetHashCode();
     if (MsgContent.Length != 0) hash ^= MsgContent.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
@@ -164,13 +164,13 @@ public sealed partial class NetMsg : pb::IMessage<NetMsg>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     output.WriteRawMessage(this);
   #else
-    if (MsgMainID != global::MsgMainIdEnum.Invalid) {
+    if (MsgMainId != global::MsgMainIdEnum.Invalid) {
       output.WriteRawTag(8);
-      output.WriteEnum((int) MsgMainID);
+      output.WriteEnum((int) MsgMainId);
     }
-    if (MsgSubID != global::MsgSubIdEnum.NoSpecific) {
+    if (MsgSubId != 0) {
       output.WriteRawTag(16);
-      output.WriteEnum((int) MsgSubID);
+      output.WriteInt32(MsgSubId);
     }
     if (MsgContent.Length != 0) {
       output.WriteRawTag(26);
@@ -186,13 +186,13 @@ public sealed partial class NetMsg : pb::IMessage<NetMsg>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-    if (MsgMainID != global::MsgMainIdEnum.Invalid) {
+    if (MsgMainId != global::MsgMainIdEnum.Invalid) {
       output.WriteRawTag(8);
-      output.WriteEnum((int) MsgMainID);
+      output.WriteEnum((int) MsgMainId);
     }
-    if (MsgSubID != global::MsgSubIdEnum.NoSpecific) {
+    if (MsgSubId != 0) {
       output.WriteRawTag(16);
-      output.WriteEnum((int) MsgSubID);
+      output.WriteInt32(MsgSubId);
     }
     if (MsgContent.Length != 0) {
       output.WriteRawTag(26);
@@ -208,11 +208,11 @@ public sealed partial class NetMsg : pb::IMessage<NetMsg>
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public int CalculateSize() {
     int size = 0;
-    if (MsgMainID != global::MsgMainIdEnum.Invalid) {
-      size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MsgMainID);
+    if (MsgMainId != global::MsgMainIdEnum.Invalid) {
+      size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MsgMainId);
     }
-    if (MsgSubID != global::MsgSubIdEnum.NoSpecific) {
-      size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MsgSubID);
+    if (MsgSubId != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeInt32Size(MsgSubId);
     }
     if (MsgContent.Length != 0) {
       size += 1 + pb::CodedOutputStream.ComputeBytesSize(MsgContent);
@@ -229,11 +229,11 @@ public sealed partial class NetMsg : pb::IMessage<NetMsg>
     if (other == null) {
       return;
     }
-    if (other.MsgMainID != global::MsgMainIdEnum.Invalid) {
-      MsgMainID = other.MsgMainID;
+    if (other.MsgMainId != global::MsgMainIdEnum.Invalid) {
+      MsgMainId = other.MsgMainId;
     }
-    if (other.MsgSubID != global::MsgSubIdEnum.NoSpecific) {
-      MsgSubID = other.MsgSubID;
+    if (other.MsgSubId != 0) {
+      MsgSubId = other.MsgSubId;
     }
     if (other.MsgContent.Length != 0) {
       MsgContent = other.MsgContent;
@@ -258,11 +258,11 @@ public sealed partial class NetMsg : pb::IMessage<NetMsg>
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
         case 8: {
-          MsgMainID = (global::MsgMainIdEnum) input.ReadEnum();
+          MsgMainId = (global::MsgMainIdEnum) input.ReadEnum();
           break;
         }
         case 16: {
-          MsgSubID = (global::MsgSubIdEnum) input.ReadEnum();
+          MsgSubId = input.ReadInt32();
           break;
         }
         case 26: {
@@ -289,11 +289,11 @@ public sealed partial class NetMsg : pb::IMessage<NetMsg>
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
           break;
         case 8: {
-          MsgMainID = (global::MsgMainIdEnum) input.ReadEnum();
+          MsgMainId = (global::MsgMainIdEnum) input.ReadEnum();
           break;
         }
         case 16: {
-          MsgSubID = (global::MsgSubIdEnum) input.ReadEnum();
+          MsgSubId = input.ReadInt32();
           break;
         }
         case 26: {

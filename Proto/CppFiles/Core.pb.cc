@@ -30,7 +30,7 @@ inline constexpr NetMsg::Impl_::Impl_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
         msgmainid_{static_cast< ::MsgMainIdEnum >(0)},
-        msgsubid_{static_cast< ::MsgSubIdEnum >(0)},
+        msgsubid_{0},
         _cached_size_{0} {}
 
 template <typename>
@@ -75,10 +75,9 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 const char descriptor_table_protodef_Core_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\nCore.proto\032\014Define.proto\"`\n\006NetMsg\022!\n\t"
-    "MsgMainID\030\001 \001(\0162\016.MsgMainIdEnum\022\037\n\010MsgSu"
-    "bID\030\002 \001(\0162\r.MsgSubIdEnum\022\022\n\nMsgContent\030\003"
-    " \001(\014b\006proto3"
+    "\n\nCore.proto\032\014Define.proto\"Q\n\006NetMsg\022!\n\t"
+    "MsgMainId\030\001 \001(\0162\016.MsgMainIdEnum\022\020\n\010MsgSu"
+    "bId\030\002 \001(\005\022\022\n\nMsgContent\030\003 \001(\014b\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_Core_2eproto_deps[1] =
     {
@@ -88,7 +87,7 @@ static ::absl::once_flag descriptor_table_Core_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Core_2eproto = {
     false,
     false,
-    132,
+    117,
     descriptor_table_protodef_Core_2eproto,
     "Core.proto",
     &descriptor_table_Core_2eproto_once,
@@ -203,10 +202,10 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> NetMsg::_table_ = {
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
-    // .MsgMainIdEnum MsgMainID = 1;
+    // .MsgMainIdEnum MsgMainId = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(NetMsg, _impl_.msgmainid_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(NetMsg, _impl_.msgmainid_)}},
-    // .MsgSubIdEnum MsgSubID = 2;
+    // int32 MsgSubId = 2;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(NetMsg, _impl_.msgsubid_), 63>(),
      {16, 63, 0, PROTOBUF_FIELD_OFFSET(NetMsg, _impl_.msgsubid_)}},
     // bytes MsgContent = 3;
@@ -215,12 +214,12 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> NetMsg::_table_ = {
   }}, {{
     65535, 65535
   }}, {{
-    // .MsgMainIdEnum MsgMainID = 1;
+    // .MsgMainIdEnum MsgMainId = 1;
     {PROTOBUF_FIELD_OFFSET(NetMsg, _impl_.msgmainid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
-    // .MsgSubIdEnum MsgSubID = 2;
+    // int32 MsgSubId = 2;
     {PROTOBUF_FIELD_OFFSET(NetMsg, _impl_.msgsubid_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // bytes MsgContent = 3;
     {PROTOBUF_FIELD_OFFSET(NetMsg, _impl_.msgcontent_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kBytes | ::_fl::kRepAString)},
@@ -251,18 +250,18 @@ PROTOBUF_NOINLINE void NetMsg::Clear() {
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // .MsgMainIdEnum MsgMainID = 1;
+  // .MsgMainIdEnum MsgMainId = 1;
   if (this->_internal_msgmainid() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
         1, this->_internal_msgmainid(), target);
   }
 
-  // .MsgSubIdEnum MsgSubID = 2;
+  // int32 MsgSubId = 2;
   if (this->_internal_msgsubid() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteEnumToArray(
-        2, this->_internal_msgsubid(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<2>(
+            stream, this->_internal_msgsubid(), target);
   }
 
   // bytes MsgContent = 3;
@@ -295,16 +294,16 @@ PROTOBUF_NOINLINE void NetMsg::Clear() {
                                     this->_internal_msgcontent());
   }
 
-  // .MsgMainIdEnum MsgMainID = 1;
+  // .MsgMainIdEnum MsgMainId = 1;
   if (this->_internal_msgmainid() != 0) {
     total_size += 1 +
                   ::_pbi::WireFormatLite::EnumSize(this->_internal_msgmainid());
   }
 
-  // .MsgSubIdEnum MsgSubID = 2;
+  // int32 MsgSubId = 2;
   if (this->_internal_msgsubid() != 0) {
-    total_size += 1 +
-                  ::_pbi::WireFormatLite::EnumSize(this->_internal_msgsubid());
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_msgsubid());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);

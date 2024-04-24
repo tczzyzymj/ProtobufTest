@@ -6,27 +6,25 @@ namespace Client
 {
     public class NetProcessor
     {
-        private const    int          mBufferSize = 1024;
-        private readonly byte[]       mBuffer     = new byte[mBufferSize];
-        private readonly string       mIPAddress  = "127.0.0.1";
-        private          int          mAskCount;
-        private          int          mIntSize = 4;
-        private          IPEndPoint   mIPEndPoint;
-        private          MemoryStream mMemoryStream;
-        private          byte[]       mMsgBufferSizeBuffer;
-        private          Socket?      mSocket;
+        private const    int           mBufferSize = 1024;
+        private const    string        mIpAddress  = "127.0.0.1";
+        private const    int           mIntSize    = sizeof(int);
+        private readonly byte[]        mBuffer     = new byte[mBufferSize];
+        private          IPEndPoint?   mIpEndPoint;
+        private          MemoryStream? mMemoryStream;
+        private          byte[]        mMsgBufferSizeBuffer = new byte[mIntSize];
+        private          Socket?       mSocket;
 
         public bool Init()
         {
-            mIntSize             = sizeof(int);
             mMsgBufferSizeBuffer = new byte[mIntSize];
             mMemoryStream        = new MemoryStream(mBuffer);
             mSocket              = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            mIPEndPoint          = new IPEndPoint(IPAddress.Parse(mIPAddress), 9117);
+            mIpEndPoint          = new IPEndPoint(IPAddress.Parse(mIpAddress), 9117);
 
             try
             {
-                mSocket.Connect(mIPEndPoint);
+                mSocket.Connect(mIpEndPoint);
                 Console.WriteLine("连接服务器成功!");
             }
             catch (Exception _exception)
@@ -44,6 +42,13 @@ namespace Client
             if ((mSocket == null) || !mSocket.Connected)
             {
                 // Console.WriteLine("Socket 无效，请检查！");
+
+                return;
+            }
+
+            if (mMemoryStream == null)
+            {
+                Console.WriteLine("错误，mMemoryStream 为空， 请检查!");
 
                 return;
             }
@@ -84,7 +89,7 @@ namespace Client
                             continue;
                         }
 
-                        InternalParseMsg(_netMsg.MsgMainID, _netMsg.MsgContent);
+                        InternalParseMsg(_netMsg.MsgMainId, _netMsg.MsgContent);
                     }
                 }
                 catch (SocketException _socketException)
@@ -117,16 +122,16 @@ namespace Client
 
             try
             {
-                //{
-                //    SendMsg(MsgMainIdEnum.HeatBeat, MsgSubIdEnum.NoSpecific, null);
-                //}
-
                 {
-                    ++mAskCount;
-                    C2SDailyAsk _msg = new C2SDailyAsk();
-                    _msg.Content = $"这是第 {mAskCount} 次询问";
-                    SendMsg(MsgMainIdEnum.DailyAsk, MsgSubIdEnum.NoSpecific, _msg);
+                    SendMsg(MsgMainIdEnum.HeatBeat, (int)MsgSubIdEnum.NoSpecific, null);
                 }
+
+                //{
+                //    ++mAskCount;
+                //    C2SDailyAsk _msg = new C2SDailyAsk();
+                //    _msg.Content = $"这是第 {mAskCount} 次询问";
+                //    SendMsg(MsgMainIdEnum.DailyAsk, MsgSubIdEnum.NoSpecific, _msg);
+                //}
             }
             catch (Exception _exception)
             {
@@ -134,7 +139,7 @@ namespace Client
             }
         }
 
-        public void SendMsg(MsgMainIdEnum mainIdEnum, MsgSubIdEnum subIdEnum, IMessage? targetMsg)
+        public void SendMsg(MsgMainIdEnum MsgMainId, int MsgSubId, IMessage? InMsg)
         {
             if (mSocket == null)
             {
@@ -143,11 +148,11 @@ namespace Client
                 return;
             }
 
-            NetMsg _msg = new NetMsg { MsgMainID = mainIdEnum, MsgSubID = subIdEnum };
+            NetMsg _msg = new NetMsg { MsgMainId = MsgMainId, MsgSubId = MsgSubId };
 
-            if (targetMsg != null)
+            if (InMsg != null)
             {
-                _msg.MsgContent = targetMsg.ToByteString();
+                _msg.MsgContent = InMsg.ToByteString();
             }
 
             byte[] _msgBuffer   = _msg.ToByteArray();
@@ -162,7 +167,7 @@ namespace Client
 
             mSocket.Send(_finalBuffer);
 
-            Console.WriteLine($"发送消息，Main ID : {mainIdEnum}, SubID : {subIdEnum}, Content : {targetMsg}");
+            Console.WriteLine($"发送消息，Main ID : {MsgMainId}, SubID : {MsgSubId}, Content : {InMsg}");
         }
 
         public void Close()
@@ -189,6 +194,7 @@ namespace Client
                 {
                     S2CDailyAsk _replyMsg = S2CDailyAsk.Parser.ParseFrom(byteString);
                     Console.WriteLine("收到消息 : " + _replyMsg);
+
                     break;
                 }
                 default:

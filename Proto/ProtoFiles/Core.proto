@@ -2,7 +2,7 @@ syntax = "proto3";
 import "Define.proto";
 
 message NetMsg{
-    MsgMainIdEnum MsgMainID = 1;
-    MsgSubIdEnum MsgSubID = 2;
+    MsgMainIdEnum MsgMainId = 1;
+    int32 MsgSubId = 2;
     bytes MsgContent = 3;
 }

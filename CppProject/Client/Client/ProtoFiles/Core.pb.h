@@ -189,8 +189,8 @@ class NetMsg final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kMsgContentFieldNumber = 3,
-    kMsgMainIDFieldNumber = 1,
-    kMsgSubIDFieldNumber = 2,
+    kMsgMainIdFieldNumber = 1,
+    kMsgSubIdFieldNumber = 2,
   };
   // bytes MsgContent = 3;
   void clear_msgcontent() ;
@@ -208,7 +208,7 @@ class NetMsg final : public ::google::protobuf::Message
   std::string* _internal_mutable_msgcontent();
 
   public:
-  // .MsgMainIdEnum MsgMainID = 1;
+  // .MsgMainIdEnum MsgMainId = 1;
   void clear_msgmainid() ;
   ::MsgMainIdEnum msgmainid() const;
   void set_msgmainid(::MsgMainIdEnum value);
@@ -218,14 +218,14 @@ class NetMsg final : public ::google::protobuf::Message
   void _internal_set_msgmainid(::MsgMainIdEnum value);
 
   public:
-  // .MsgSubIdEnum MsgSubID = 2;
+  // int32 MsgSubId = 2;
   void clear_msgsubid() ;
-  ::MsgSubIdEnum msgsubid() const;
-  void set_msgsubid(::MsgSubIdEnum value);
+  ::int32_t msgsubid() const;
+  void set_msgsubid(::int32_t value);
 
   private:
-  ::MsgSubIdEnum _internal_msgsubid() const;
-  void _internal_set_msgsubid(::MsgSubIdEnum value);
+  ::int32_t _internal_msgsubid() const;
+  void _internal_set_msgsubid(::int32_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:NetMsg)
@@ -256,7 +256,7 @@ class NetMsg final : public ::google::protobuf::Message
                           const NetMsg& from_msg);
     ::google::protobuf::internal::ArenaStringPtr msgcontent_;
     int msgmainid_;
-    int msgsubid_;
+    ::int32_t msgsubid_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -280,18 +280,18 @@ class NetMsg final : public ::google::protobuf::Message
 
 // NetMsg
 
-// .MsgMainIdEnum MsgMainID = 1;
+// .MsgMainIdEnum MsgMainId = 1;
 inline void NetMsg::clear_msgmainid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.msgmainid_ = 0;
 }
 inline ::MsgMainIdEnum NetMsg::msgmainid() const {
-  // @@protoc_insertion_point(field_get:NetMsg.MsgMainID)
+  // @@protoc_insertion_point(field_get:NetMsg.MsgMainId)
   return _internal_msgmainid();
 }
 inline void NetMsg::set_msgmainid(::MsgMainIdEnum value) {
   _internal_set_msgmainid(value);
-  // @@protoc_insertion_point(field_set:NetMsg.MsgMainID)
+  // @@protoc_insertion_point(field_set:NetMsg.MsgMainId)
 }
 inline ::MsgMainIdEnum NetMsg::_internal_msgmainid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -302,24 +302,24 @@ inline void NetMsg::_internal_set_msgmainid(::MsgMainIdEnum value) {
   _impl_.msgmainid_ = value;
 }
 
-// .MsgSubIdEnum MsgSubID = 2;
+// int32 MsgSubId = 2;
 inline void NetMsg::clear_msgsubid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.msgsubid_ = 0;
 }
-inline ::MsgSubIdEnum NetMsg::msgsubid() const {
-  // @@protoc_insertion_point(field_get:NetMsg.MsgSubID)
+inline ::int32_t NetMsg::msgsubid() const {
+  // @@protoc_insertion_point(field_get:NetMsg.MsgSubId)
   return _internal_msgsubid();
 }
-inline void NetMsg::set_msgsubid(::MsgSubIdEnum value) {
+inline void NetMsg::set_msgsubid(::int32_t value) {
   _internal_set_msgsubid(value);
-  // @@protoc_insertion_point(field_set:NetMsg.MsgSubID)
+  // @@protoc_insertion_point(field_set:NetMsg.MsgSubId)
 }
-inline ::MsgSubIdEnum NetMsg::_internal_msgsubid() const {
+inline ::int32_t NetMsg::_internal_msgsubid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return static_cast<::MsgSubIdEnum>(_impl_.msgsubid_);
+  return _impl_.msgsubid_;
 }
-inline void NetMsg::_internal_set_msgsubid(::MsgSubIdEnum value) {
+inline void NetMsg::_internal_set_msgsubid(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.msgsubid_ = value;
 }
