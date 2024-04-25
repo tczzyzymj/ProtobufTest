@@ -28,16 +28,15 @@ for %%f in (%PROTO_DIR%\*.proto) do (
     )
 )
 
-set CLIENT_COPY_DIR=../CSharpProject/Client/Client/ProtoFiles/
-set SERVER_COPY_DIR=../CSharpProject/Server/Server/ProtoFiles/
-
-:: 拷贝到CSharp_Client
-for %%f in (%OUT_DIR%\*.cs) do (
-    copy "%%f" "%CLIENT_COPY_DIR%"
-    copy "%%f" "%SERVER_COPY_DIR%"
-)
-
 if %ANY_ERROR% == 0 (
+    set CLIENT_COPY_DIR=../CSharpProject/Client/Client/ProtoFiles/
+    set SERVER_COPY_DIR=../CSharpProject/Server/Server/ProtoFiles/
+
+    :: 拷贝到CSharp_Client
+    for %%f in (%OUT_DIR%\*.cs) do (
+        copy "%%f" "%CLIENT_COPY_DIR%"
+        copy "%%f" "%SERVER_COPY_DIR%"
+    )
     echo All Done !
 ) else (
     echo Compile Error , Please check !

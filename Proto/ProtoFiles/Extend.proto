@@ -1,5 +1,5 @@
 syntax = "proto3";
-import "google.protobuf.descriptor.proto";
+import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.EnumValueOptions{
     string net_req_proto = 1201;

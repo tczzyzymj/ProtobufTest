@@ -9,41 +9,46 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-/// <summary>Holder for reflection information generated from Define.proto</summary>
-public static partial class DefineReflection {
+namespace NFProto {
 
-  #region Descriptor
-  /// <summary>File descriptor for Define.proto</summary>
-  public static pbr::FileDescriptor Descriptor {
-    get { return descriptor; }
-  }
-  private static pbr::FileDescriptor descriptor;
+  /// <summary>Holder for reflection information generated from Define.proto</summary>
+  public static partial class DefineReflection {
 
-  static DefineReflection() {
-    byte[] descriptorData = global::System.Convert.FromBase64String(
-        string.Concat(
-          "CgxEZWZpbmUucHJvdG8qOAoNTXNnTWFpbklkRW51bRILCgdJbnZhbGlkEAAS",
-          "DAoISGVhdEJlYXQQARIMCghEYWlseUFzaxACKh4KDE1zZ1N1YklkRW51bRIO",
-          "CgpOb1NwZWNpZmljEABiBnByb3RvMw=="));
-    descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-        new pbr::FileDescriptor[] { },
-        new pbr::GeneratedClrTypeInfo(new[] {typeof(global::MsgMainIdEnum), typeof(global::MsgSubIdEnum), }, null, null));
+    #region Descriptor
+    /// <summary>File descriptor for Define.proto</summary>
+    public static pbr::FileDescriptor Descriptor {
+      get { return descriptor; }
+    }
+    private static pbr::FileDescriptor descriptor;
+
+    static DefineReflection() {
+      byte[] descriptorData = global::System.Convert.FromBase64String(
+          string.Concat(
+            "CgxEZWZpbmUucHJvdG8SB05GUHJvdG8aDEV4dGVuZC5wcm90bypmCg1Nc2dN",
+            "YWluSWRFbnVtEgsKB0ludmFsaWQQABIMCghIZWF0QmVhdBABEjoKCERhaWx5",
+            "QXNrEAIaLIpLE05GUHJvdG8uQzJTRGFpbHlBc2uSSxNORlByb3RvLlMyQ0Rh",
+            "aWx5QXNrKh4KDE1zZ1N1YklkRW51bRIOCgpOb1NwZWNpZmljEABiBnByb3Rv",
+            "Mw=="));
+      descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
+          new pbr::FileDescriptor[] { global::ExtendReflection.Descriptor, },
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFProto.MsgMainIdEnum), typeof(global::NFProto.MsgSubIdEnum), }, null, null));
+    }
+    #endregion
+
   }
+  #region Enums
+  public enum MsgMainIdEnum {
+    [pbr::OriginalName("Invalid")] Invalid = 0,
+    [pbr::OriginalName("HeatBeat")] HeatBeat = 1,
+    [pbr::OriginalName("DailyAsk")] DailyAsk = 2,
+  }
+
+  public enum MsgSubIdEnum {
+    [pbr::OriginalName("NoSpecific")] NoSpecific = 0,
+  }
+
   #endregion
 
 }
-#region Enums
-public enum MsgMainIdEnum {
-  [pbr::OriginalName("Invalid")] Invalid = 0,
-  [pbr::OriginalName("HeatBeat")] HeatBeat = 1,
-  [pbr::OriginalName("DailyAsk")] DailyAsk = 2,
-}
-
-public enum MsgSubIdEnum {
-  [pbr::OriginalName("NoSpecific")] NoSpecific = 0,
-}
-
-#endregion
-
 
 #endregion Designer generated code
