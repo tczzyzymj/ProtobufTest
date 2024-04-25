@@ -6,8 +6,8 @@ enum MsgMainIdEnum{
     Invalid = 0;
     HeatBeat = 1;
     DailyAsk = 2[
-        (net_req_proto) = "NFProto.C2SDailyAsk",
-        (net_rsp_proto) = "NFProto.S2CDailyAsk"
+        (NetReqProto) = "NFProto.C2SDailyAsk",
+        (NetRspProto) = "NFProto.S2CDailyAsk"
     ];
 }
 

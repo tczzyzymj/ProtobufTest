@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using Google.Protobuf;
+using NFProto;
 
 namespace Client
 {
