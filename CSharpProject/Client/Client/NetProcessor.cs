@@ -90,7 +90,7 @@ namespace Client
                             continue;
                         }
 
-                        InternalParseMsg(_netMsg.MsgMainId, _netMsg.MsgContent);
+                        InternalParseMsg(_netMsg.MsgMainId, _netMsg.MsgSubId, _netMsg.MsgContent);
                     }
                 }
                 catch (SocketException _socketException)
@@ -179,9 +179,9 @@ namespace Client
             }
         }
 
-        private void InternalParseMsg(MsgMainIdEnum msgmainId, ByteString byteString)
+        private void InternalParseMsg(MsgMainIdEnum InMsgMainId, int InMsgSubId, ByteString InByteString)
         {
-            switch (msgmainId)
+            switch (InMsgMainId)
             {
                 case MsgMainIdEnum.Invalid:
                 {
@@ -193,14 +193,14 @@ namespace Client
                 }
                 case MsgMainIdEnum.DailyAsk:
                 {
-                    S2CDailyAsk _replyMsg = S2CDailyAsk.Parser.ParseFrom(byteString);
+                    S2CDailyAsk _replyMsg = S2CDailyAsk.Parser.ParseFrom(InByteString);
                     Console.WriteLine("收到消息 : " + _replyMsg);
 
                     break;
                 }
                 default:
                 {
-                    throw new ArgumentOutOfRangeException(nameof(msgmainId), msgmainId, null);
+                    throw new ArgumentOutOfRangeException(nameof(InMsgMainId), InMsgMainId, null);
                 }
             }
         }

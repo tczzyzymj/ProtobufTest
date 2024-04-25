@@ -1,4 +1,8 @@
-﻿namespace Client
+﻿using Google.Protobuf;
+using Google.Protobuf.Reflection;
+using NFProto;
+
+namespace Client
 {
     internal class Program
     {
