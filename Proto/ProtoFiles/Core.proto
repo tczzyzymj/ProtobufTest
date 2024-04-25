@@ -6,3 +6,4 @@ message NetMsg{
     int32 MsgSubId = 2;
     bytes MsgContent = 3;
 }
+
