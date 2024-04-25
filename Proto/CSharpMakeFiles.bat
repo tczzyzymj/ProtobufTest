@@ -12,13 +12,14 @@ set OUT_LANG=csharp
  
 :: 设置目标目录
 set OUT_DIR=./CSharpFiles
-
 set RELATE_DIR=%~dp0
-
 set ANY_ERROR=0
 
+set CLIENT_COPY_DIR=../CSharpProject/Client/Client/ProtoFiles/
+set SERVER_COPY_DIR=../CSharpProject/Server/Server/ProtoFiles/
+
 :: 循环删除目标目录的文件和文件夹
-del /q "%RELATE_DIR%\%OUT_DIR%\*.*"
+del /s /q "%RELATE_DIR%\%OUT_DIR%\*.*"
 
 :: 循环遍历目录下的所有.proto文件
 for %%f in (%PROTO_DIR%\*.proto) do (
@@ -31,9 +32,6 @@ for %%f in (%PROTO_DIR%\*.proto) do (
 
 :END_LABEL
 if %ANY_ERROR% == 0 (
-    set CLIENT_COPY_DIR=../CSharpProject/Client/Client/ProtoFiles/
-    set SERVER_COPY_DIR=../CSharpProject/Server/Server/ProtoFiles/
-
     :: 拷贝到CSharp_Client
     for %%f in (%OUT_DIR%\*.cs) do (
         copy /y "%%f" "%CLIENT_COPY_DIR%"

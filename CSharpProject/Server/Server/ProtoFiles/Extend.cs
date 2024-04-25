@@ -23,9 +23,9 @@ public static partial class ExtendReflection {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
           "CgxFeHRlbmQucHJvdG8aIGdvb2dsZS9wcm90b2J1Zi9kZXNjcmlwdG9yLnBy",
-          "b3RvOjkKDW5ldF9yZXFfcHJvdG8SIS5nb29nbGUucHJvdG9idWYuRW51bVZh",
-          "bHVlT3B0aW9ucxixCSABKAk6OQoNbmV0X3JzcF9wcm90bxIhLmdvb2dsZS5w",
-          "cm90b2J1Zi5FbnVtVmFsdWVPcHRpb25zGLIJIAEoCWIGcHJvdG8z"));
+          "b3RvOjcKC05ldFJlcVByb3RvEiEuZ29vZ2xlLnByb3RvYnVmLkVudW1WYWx1",
+          "ZU9wdGlvbnMYsQkgASgJOjcKC05ldFJzcFByb3RvEiEuZ29vZ2xlLnByb3Rv",
+          "YnVmLkVudW1WYWx1ZU9wdGlvbnMYsgkgASgJYgZwcm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { global::Google.Protobuf.Reflection.DescriptorReflection.Descriptor, },
         new pbr::GeneratedClrTypeInfo(null, new pb::Extension[] { ExtendExtensions.NetReqProto, ExtendExtensions.NetRspProto }, null));

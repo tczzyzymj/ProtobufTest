@@ -9,305 +9,308 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-/// <summary>Holder for reflection information generated from Core.proto</summary>
-public static partial class CoreReflection {
+namespace NFProto {
 
-  #region Descriptor
-  /// <summary>File descriptor for Core.proto</summary>
-  public static pbr::FileDescriptor Descriptor {
-    get { return descriptor; }
-  }
-  private static pbr::FileDescriptor descriptor;
+  /// <summary>Holder for reflection information generated from Core.proto</summary>
+  public static partial class CoreReflection {
 
-  static CoreReflection() {
-    byte[] descriptorData = global::System.Convert.FromBase64String(
-        string.Concat(
-          "CgpDb3JlLnByb3RvGgxEZWZpbmUucHJvdG8iUQoGTmV0TXNnEiEKCU1zZ01h",
-          "aW5JZBgBIAEoDjIOLk1zZ01haW5JZEVudW0SEAoITXNnU3ViSWQYAiABKAUS",
-          "EgoKTXNnQ29udGVudBgDIAEoDGIGcHJvdG8z"));
-    descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-        new pbr::FileDescriptor[] { global::DefineReflection.Descriptor, },
-        new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::NetMsg), global::NetMsg.Parser, new[]{ "MsgMainId", "MsgSubId", "MsgContent" }, null, null, null, null)
-        }));
+    #region Descriptor
+    /// <summary>File descriptor for Core.proto</summary>
+    public static pbr::FileDescriptor Descriptor {
+      get { return descriptor; }
+    }
+    private static pbr::FileDescriptor descriptor;
+
+    static CoreReflection() {
+      byte[] descriptorData = global::System.Convert.FromBase64String(
+          string.Concat(
+            "CgpDb3JlLnByb3RvEgdORlByb3RvGgxEZWZpbmUucHJvdG8iWQoGTmV0TXNn",
+            "EikKCU1zZ01haW5JZBgBIAEoDjIWLk5GUHJvdG8uTXNnTWFpbklkRW51bRIQ",
+            "CghNc2dTdWJJZBgCIAEoBRISCgpNc2dDb250ZW50GAMgASgMYgZwcm90bzM="));
+      descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
+          new pbr::FileDescriptor[] { global::NFProto.DefineReflection.Descriptor, },
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::NFProto.NetMsg), global::NFProto.NetMsg.Parser, new[]{ "MsgMainId", "MsgSubId", "MsgContent" }, null, null, null, null)
+          }));
+    }
+    #endregion
+
   }
+  #region Messages
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class NetMsg : pb::IMessage<NetMsg>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<NetMsg> _parser = new pb::MessageParser<NetMsg>(() => new NetMsg());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<NetMsg> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NFProto.CoreReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public NetMsg() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public NetMsg(NetMsg other) : this() {
+      msgMainId_ = other.msgMainId_;
+      msgSubId_ = other.msgSubId_;
+      msgContent_ = other.msgContent_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public NetMsg Clone() {
+      return new NetMsg(this);
+    }
+
+    /// <summary>Field number for the "MsgMainId" field.</summary>
+    public const int MsgMainIdFieldNumber = 1;
+    private global::NFProto.MsgMainIdEnum msgMainId_ = global::NFProto.MsgMainIdEnum.Invalid;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::NFProto.MsgMainIdEnum MsgMainId {
+      get { return msgMainId_; }
+      set {
+        msgMainId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "MsgSubId" field.</summary>
+    public const int MsgSubIdFieldNumber = 2;
+    private int msgSubId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int MsgSubId {
+      get { return msgSubId_; }
+      set {
+        msgSubId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "MsgContent" field.</summary>
+    public const int MsgContentFieldNumber = 3;
+    private pb::ByteString msgContent_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pb::ByteString MsgContent {
+      get { return msgContent_; }
+      set {
+        msgContent_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as NetMsg);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(NetMsg other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MsgMainId != other.MsgMainId) return false;
+      if (MsgSubId != other.MsgSubId) return false;
+      if (MsgContent != other.MsgContent) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MsgMainId != global::NFProto.MsgMainIdEnum.Invalid) hash ^= MsgMainId.GetHashCode();
+      if (MsgSubId != 0) hash ^= MsgSubId.GetHashCode();
+      if (MsgContent.Length != 0) hash ^= MsgContent.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (MsgMainId != global::NFProto.MsgMainIdEnum.Invalid) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) MsgMainId);
+      }
+      if (MsgSubId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(MsgSubId);
+      }
+      if (MsgContent.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(MsgContent);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (MsgMainId != global::NFProto.MsgMainIdEnum.Invalid) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) MsgMainId);
+      }
+      if (MsgSubId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(MsgSubId);
+      }
+      if (MsgContent.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(MsgContent);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (MsgMainId != global::NFProto.MsgMainIdEnum.Invalid) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MsgMainId);
+      }
+      if (MsgSubId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MsgSubId);
+      }
+      if (MsgContent.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(MsgContent);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(NetMsg other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MsgMainId != global::NFProto.MsgMainIdEnum.Invalid) {
+        MsgMainId = other.MsgMainId;
+      }
+      if (other.MsgSubId != 0) {
+        MsgSubId = other.MsgSubId;
+      }
+      if (other.MsgContent.Length != 0) {
+        MsgContent = other.MsgContent;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            MsgMainId = (global::NFProto.MsgMainIdEnum) input.ReadEnum();
+            break;
+          }
+          case 16: {
+            MsgSubId = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            MsgContent = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            MsgMainId = (global::NFProto.MsgMainIdEnum) input.ReadEnum();
+            break;
+          }
+          case 16: {
+            MsgSubId = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            MsgContent = input.ReadBytes();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
   #endregion
 
 }
-#region Messages
-[global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-public sealed partial class NetMsg : pb::IMessage<NetMsg>
-#if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    , pb::IBufferMessage
-#endif
-{
-  private static readonly pb::MessageParser<NetMsg> _parser = new pb::MessageParser<NetMsg>(() => new NetMsg());
-  private pb::UnknownFieldSet _unknownFields;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public static pb::MessageParser<NetMsg> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::CoreReflection.Descriptor.MessageTypes[0]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public NetMsg() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public NetMsg(NetMsg other) : this() {
-    msgMainId_ = other.msgMainId_;
-    msgSubId_ = other.msgSubId_;
-    msgContent_ = other.msgContent_;
-    _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public NetMsg Clone() {
-    return new NetMsg(this);
-  }
-
-  /// <summary>Field number for the "MsgMainId" field.</summary>
-  public const int MsgMainIdFieldNumber = 1;
-  private global::MsgMainIdEnum msgMainId_ = global::MsgMainIdEnum.Invalid;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public global::MsgMainIdEnum MsgMainId {
-    get { return msgMainId_; }
-    set {
-      msgMainId_ = value;
-    }
-  }
-
-  /// <summary>Field number for the "MsgSubId" field.</summary>
-  public const int MsgSubIdFieldNumber = 2;
-  private int msgSubId_;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public int MsgSubId {
-    get { return msgSubId_; }
-    set {
-      msgSubId_ = value;
-    }
-  }
-
-  /// <summary>Field number for the "MsgContent" field.</summary>
-  public const int MsgContentFieldNumber = 3;
-  private pb::ByteString msgContent_ = pb::ByteString.Empty;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public pb::ByteString MsgContent {
-    get { return msgContent_; }
-    set {
-      msgContent_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public override bool Equals(object other) {
-    return Equals(other as NetMsg);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public bool Equals(NetMsg other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (MsgMainId != other.MsgMainId) return false;
-    if (MsgSubId != other.MsgSubId) return false;
-    if (MsgContent != other.MsgContent) return false;
-    return Equals(_unknownFields, other._unknownFields);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (MsgMainId != global::MsgMainIdEnum.Invalid) hash ^= MsgMainId.GetHashCode();
-    if (MsgSubId != 0) hash ^= MsgSubId.GetHashCode();
-    if (MsgContent.Length != 0) hash ^= MsgContent.GetHashCode();
-    if (_unknownFields != null) {
-      hash ^= _unknownFields.GetHashCode();
-    }
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public void WriteTo(pb::CodedOutputStream output) {
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    output.WriteRawMessage(this);
-  #else
-    if (MsgMainId != global::MsgMainIdEnum.Invalid) {
-      output.WriteRawTag(8);
-      output.WriteEnum((int) MsgMainId);
-    }
-    if (MsgSubId != 0) {
-      output.WriteRawTag(16);
-      output.WriteInt32(MsgSubId);
-    }
-    if (MsgContent.Length != 0) {
-      output.WriteRawTag(26);
-      output.WriteBytes(MsgContent);
-    }
-    if (_unknownFields != null) {
-      _unknownFields.WriteTo(output);
-    }
-  #endif
-  }
-
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-    if (MsgMainId != global::MsgMainIdEnum.Invalid) {
-      output.WriteRawTag(8);
-      output.WriteEnum((int) MsgMainId);
-    }
-    if (MsgSubId != 0) {
-      output.WriteRawTag(16);
-      output.WriteInt32(MsgSubId);
-    }
-    if (MsgContent.Length != 0) {
-      output.WriteRawTag(26);
-      output.WriteBytes(MsgContent);
-    }
-    if (_unknownFields != null) {
-      _unknownFields.WriteTo(ref output);
-    }
-  }
-  #endif
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public int CalculateSize() {
-    int size = 0;
-    if (MsgMainId != global::MsgMainIdEnum.Invalid) {
-      size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MsgMainId);
-    }
-    if (MsgSubId != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeInt32Size(MsgSubId);
-    }
-    if (MsgContent.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeBytesSize(MsgContent);
-    }
-    if (_unknownFields != null) {
-      size += _unknownFields.CalculateSize();
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public void MergeFrom(NetMsg other) {
-    if (other == null) {
-      return;
-    }
-    if (other.MsgMainId != global::MsgMainIdEnum.Invalid) {
-      MsgMainId = other.MsgMainId;
-    }
-    if (other.MsgSubId != 0) {
-      MsgSubId = other.MsgSubId;
-    }
-    if (other.MsgContent.Length != 0) {
-      MsgContent = other.MsgContent;
-    }
-    _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public void MergeFrom(pb::CodedInputStream input) {
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    input.ReadRawMessage(this);
-  #else
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-    if ((tag & 7) == 4) {
-      // Abort on any end group tag.
-      return;
-    }
-    switch(tag) {
-        default:
-          _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-          break;
-        case 8: {
-          MsgMainId = (global::MsgMainIdEnum) input.ReadEnum();
-          break;
-        }
-        case 16: {
-          MsgSubId = input.ReadInt32();
-          break;
-        }
-        case 26: {
-          MsgContent = input.ReadBytes();
-          break;
-        }
-      }
-    }
-  #endif
-  }
-
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-    if ((tag & 7) == 4) {
-      // Abort on any end group tag.
-      return;
-    }
-    switch(tag) {
-        default:
-          _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-          break;
-        case 8: {
-          MsgMainId = (global::MsgMainIdEnum) input.ReadEnum();
-          break;
-        }
-        case 16: {
-          MsgSubId = input.ReadInt32();
-          break;
-        }
-        case 26: {
-          MsgContent = input.ReadBytes();
-          break;
-        }
-      }
-    }
-  }
-  #endif
-
-}
-
-#endregion
-
 
 #endregion Designer generated code
