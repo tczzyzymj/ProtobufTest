@@ -1,21 +1,22 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using Google.Protobuf;
+using NFProto;
 
 namespace Server
 {
     public class ServerProcessor
     {
         private const    int                        mBufferSize      = 1024;
+        private readonly byte[]                     mBuffer          = new byte[mBufferSize];
         private readonly Dictionary<string, Socket> mClientSocketMap = new Dictionary<string, Socket>();
         private readonly int                        mPort            = 9117;
-        private readonly byte[]                     mBuffer          = new byte[mBufferSize];
-        private          int                        mCount;
-        private          int                        mIntSize = 4;
-        private          MemoryStream               mMemoryStream;
-        private          byte[]                     mMsgBufferSizeBuffer;
+        private          int                        mIntSize         = 4;
+        private          MemoryStream?              mMemoryStream;
+        private          byte[]?                    mMsgBufferSizeBuffer;
+        private          int                        mReceiveCount;
         private          Socket?                    mServerSocket;
-        private          int                        mReceiveCount = 0;
+
         public bool Init()
         {
             mIntSize             = sizeof(int);
@@ -40,6 +41,13 @@ namespace Server
 
         public void TryAcceptClient()
         {
+            if (mServerSocket == null)
+            {
+                Console.WriteLine("服务器没有启动，请检查");
+
+                return;
+            }
+
             Socket _clientSocket = mServerSocket.Accept();
 
             if ((_clientSocket != null) && _clientSocket.Connected && (_clientSocket.RemoteEndPoint != null))
@@ -71,6 +79,19 @@ namespace Server
 
         public void HandleMsg()
         {
+            if (mMemoryStream == null)
+            {
+                Console.WriteLine("mMemoryStream 为空，请检查");
+
+                return;
+            }
+
+            if (mMsgBufferSizeBuffer == null)
+            {
+                Console.WriteLine("mMsgBufferSizeBuffer 为空，请检查");
+                return;
+            }
+
             try
             {
                 if (mClientSocketMap.Count < 1)
@@ -125,7 +146,7 @@ namespace Server
                                 continue;
                             }
 
-                            InternalParseMsg(_netMsg.MsgMainID, _netMsg.MsgContent, _clientSocketValueArray[_i]);
+                            InternalParseMsg(_netMsg.MsgMainId, _netMsg.MsgContent, _clientSocketValueArray[_i]);
                         }
                     }
                     catch (SocketException _socketException)
@@ -171,7 +192,7 @@ namespace Server
                     S2CDailyAsk _replyMsg = new S2CDailyAsk();
                     ++mReceiveCount;
                     _replyMsg.Content = $"哟西，已收到 {mReceiveCount} 次";
-                    SendMsg(MsgMainIdEnum.DailyAsk, MsgSubIdEnum.NoSpecific, targetSocket, _replyMsg);
+                    SendMsg(MsgMainIdEnum.DailyAsk, (int)MsgSubIdEnum.NoSpecific, targetSocket, _replyMsg);
 
                     break;
                 }
@@ -182,20 +203,20 @@ namespace Server
             }
         }
 
-        public void SendMsg(MsgMainIdEnum mainIdEnum, MsgSubIdEnum subIdEnum, Socket targetSocket, IMessage? targetMsg)
+        public void SendMsg(MsgMainIdEnum MainIdEnum, int SubIdEnum, Socket TargetSocket, IMessage? TargetMsg)
         {
-            if (targetSocket == null)
+            if (TargetSocket == null)
             {
                 Console.WriteLine("无连接，请检查!");
 
                 return;
             }
 
-            NetMsg _msg = new NetMsg { MsgMainID = mainIdEnum, MsgSubID = subIdEnum };
+            NetMsg _msg = new NetMsg { MsgMainId = MainIdEnum, MsgSubId = SubIdEnum };
 
-            if (targetMsg != null)
+            if (TargetMsg != null)
             {
-                _msg.MsgContent = targetMsg.ToByteString();
+                _msg.MsgContent = TargetMsg.ToByteString();
             }
 
             byte[] _msgBuffer   = _msg.ToByteArray();
@@ -208,9 +229,9 @@ namespace Server
                 _ms.Write(_msgBuffer);
             }
 
-            targetSocket.Send(_finalBuffer);
+            TargetSocket.Send(_finalBuffer);
 
-            Console.WriteLine($"发送消息，Main ID : {mainIdEnum}, SubID : {subIdEnum}, Content : {targetMsg}");
+            Console.WriteLine($"发送消息，Main ID : {MainIdEnum}, SubID : {SubIdEnum}, Content : {TargetMsg}");
         }
     }
 }

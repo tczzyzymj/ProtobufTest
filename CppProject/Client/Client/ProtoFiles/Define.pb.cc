@@ -33,11 +33,11 @@ static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
 static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 const char descriptor_table_protodef_Define_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\014Define.proto\022\007NFProto\032\014Extend.proto*f\n"
-    "\rMsgMainIdEnum\022\013\n\007Invalid\020\000\022\014\n\010HeatBeat\020"
-    "\001\022:\n\010DailyAsk\020\002\032,\212K\023NFProto.C2SDailyAsk\222"
-    "K\023NFProto.S2CDailyAsk*\036\n\014MsgSubIdEnum\022\016\n"
-    "\nNoSpecific\020\000b\006proto3"
+    "\n\014Define.proto\022\007NFProto\032\014Extend.proto*n\n"
+    "\rMsgMainIdEnum\022\013\n\007Invalid\020\000\022\021\n\010HeatBeat\020"
+    "\001\032\003\210K\000\022=\n\010DailyAsk\020\002\032/\210K\001\222K\023NFProto.C2SD"
+    "ailyAsk\232K\023NFProto.S2CDailyAsk*\036\n\014MsgSubI"
+    "dEnum\022\016\n\nNoSpecific\020\000b\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_Define_2eproto_deps[1] =
     {
@@ -47,7 +47,7 @@ static ::absl::once_flag descriptor_table_Define_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Define_2eproto = {
     false,
     false,
-    181,
+    189,
     descriptor_table_protodef_Define_2eproto,
     "Define.proto",
     &descriptor_table_Define_2eproto_once,

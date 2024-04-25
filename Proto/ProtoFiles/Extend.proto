@@ -2,6 +2,7 @@ syntax = "proto3";
 import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.EnumValueOptions{
-    string NetReqProto = 1201;
-    string NetRspProto = 1202;
+    bool SpecificProto = 1201;
+    string NetReqProto = 1202;
+    string NetRspProto = 1203;
 }

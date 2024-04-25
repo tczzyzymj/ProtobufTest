@@ -1,20 +1,24 @@
 ﻿using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
+using Client.Common;
 using Google.Protobuf;
+using Google.Protobuf.Reflection;
 using NFProto;
 
 namespace Client
 {
     public class NetProcessor
     {
-        private const    int           mBufferSize = 1024;
-        private const    string        mIpAddress  = "127.0.0.1";
-        private const    int           mIntSize    = sizeof(int);
-        private readonly byte[]        mBuffer     = new byte[mBufferSize];
-        private          IPEndPoint?   mIpEndPoint;
-        private          MemoryStream? mMemoryStream;
-        private          byte[]        mMsgBufferSizeBuffer = new byte[mIntSize];
-        private          Socket?       mSocket;
+        private const    int             mBufferSize = 1024;
+        private const    string          mIpAddress  = "127.0.0.1";
+        private const    int             mIntSize    = sizeof(int);
+        private readonly byte[]          mBuffer     = new byte[mBufferSize];
+        private          IPEndPoint?     mIpEndPoint;
+        private          MemoryStream?   mMemoryStream;
+        private          byte[]          mMsgBufferSizeBuffer = new byte[mIntSize];
+        private          EnumDescriptor? mMsgMainIdDescriptor;
+        private          Socket?         mSocket;
 
         public bool Init()
         {
@@ -32,6 +36,13 @@ namespace Client
             {
                 Console.WriteLine(_exception);
 
+                return false;
+            }
+
+            mMsgMainIdDescriptor = DefineReflection.Descriptor.FindTypeByName<EnumDescriptor>(nameof(MsgMainIdEnum));
+
+            if (mMsgMainIdDescriptor == null)
+            {
                 return false;
             }
 
@@ -123,16 +134,7 @@ namespace Client
 
             try
             {
-                {
-                    SendMsg(MsgMainIdEnum.HeatBeat, (int)MsgSubIdEnum.NoSpecific, null);
-                }
-
-                //{
-                //    ++mAskCount;
-                //    C2SDailyAsk _msg = new C2SDailyAsk();
-                //    _msg.Content = $"这是第 {mAskCount} 次询问";
-                //    SendMsg(MsgMainIdEnum.DailyAsk, MsgSubIdEnum.NoSpecific, _msg);
-                //}
+                SendMsg(MsgMainIdEnum.HeatBeat, (int)MsgSubIdEnum.NoSpecific, null);
             }
             catch (Exception _exception)
             {
@@ -168,7 +170,7 @@ namespace Client
 
             mSocket.Send(_finalBuffer);
 
-            Console.WriteLine($"发送消息，Main ID : {MsgMainId}, SubID : {MsgSubId}, Content : {InMsg}");
+            NFLog.Ins().LogError($"发送消息，Main ID : {MsgMainId}, SubID : {MsgSubId}, Content : {InMsg}");
         }
 
         public void Close()
@@ -179,28 +181,85 @@ namespace Client
             }
         }
 
-        private void InternalParseMsg(MsgMainIdEnum InMsgMainId, int InMsgSubId, ByteString InByteString)
+        public void InternalParseMsg(MsgMainIdEnum InMsgMainId, int InMsgSubId, ByteString InByteString)
         {
-            switch (InMsgMainId)
+            if (mMsgMainIdDescriptor == null)
             {
-                case MsgMainIdEnum.Invalid:
-                {
-                    break;
-                }
-                case MsgMainIdEnum.HeatBeat:
-                {
-                    break;
-                }
-                case MsgMainIdEnum.DailyAsk:
-                {
-                    S2CDailyAsk _replyMsg = S2CDailyAsk.Parser.ParseFrom(InByteString);
-                    Console.WriteLine("收到消息 : " + _replyMsg);
+                mMsgMainIdDescriptor = DefineReflection.Descriptor.FindTypeByName<EnumDescriptor>(nameof(MsgMainIdEnum));
+            }
 
-                    break;
-                }
-                default:
+            EnumValueDescriptor? _tempDescriptor = mMsgMainIdDescriptor.FindValueByNumber((int)InMsgMainId);
+
+            if (_tempDescriptor == null)
+            {
+                NFLog.Ins().LogError($"没有找到目标 {InMsgMainId} 的 Descriptor");
+
+                return;
+            }
+
+            EnumValueOptions? _targetOptions = _tempDescriptor.GetOptions();
+
+            if (_targetOptions == null)
+            {
+                return;
+            }
+
+            bool _specificProto = _targetOptions.GetExtension(ExtendExtensions.SpecificProto);
+
+            if (!_specificProto)
+            {
+                return;
+            }
+
+            string? _rspProtoName = _targetOptions.GetExtension(ExtendExtensions.NetRspProto);
+
+            if (string.IsNullOrEmpty(_rspProtoName))
+            {
+                NFLog.Ins().LogError($"MsgMainIdEnum : {InMsgMainId} ，没有Proto对象，请检查");
+
+                return;
+            }
+
+            Type? _type = Type.GetType(_rspProtoName);
+
+            if (_type == null)
+            {
+                NFLog.Ins().LogError($"无法获取指定 Type , class name : {_rspProtoName}");
+
+                return;
+            }
+
+            PropertyInfo? _propertyInfo = _type.GetProperty("Parser");
+
+            if (_propertyInfo == null)
+            {
+                NFLog.Ins().LogError($"无法获取类：{_rspProtoName} 里面的 Parser 属性，请检查");
+
+                return;
+            }
+
+            MethodInfo? _method = _propertyInfo.GetType().GetMethod("ParseFrom", BindingFlags.Default, new[] { typeof(ByteString) });
+
+            if (_method == null)
+            {
+                NFLog.Ins().LogError("错误，类：{} 的 成员 ： {} ，无法获取方法 ParseFrom(ByteString)");
+
+                return;
+            }
+
+            object? _resultObj = _method.Invoke(_propertyInfo, new object[] { InByteString });
+
+            if ((InMsgMainId == MsgMainIdEnum.DailyAsk) && (_resultObj != null))
+            {
+                S2CDailyAsk? _replyMsg = _resultObj as S2CDailyAsk;
+
+                if (_replyMsg == null)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(InMsgMainId), InMsgMainId, null);
+                    NFLog.Ins().LogError("消息无法转化为 S2CDailyAsk，请检查");
+                }
+                else
+                {
+                    NFLog.Ins().LogError("收到消息 : " + _replyMsg);
                 }
             }
         }

@@ -62,12 +62,17 @@ namespace protobuf {
 
 
 
-static const int kNetReqProtoFieldNumber = 1201;
+static const int kSpecificProtoFieldNumber = 1201;
+extern ::google::protobuf::internal::ExtensionIdentifier<
+    ::google::protobuf::EnumValueOptions, ::google::protobuf::internal::PrimitiveTypeTraits< bool >, 8,
+    false>
+    SpecificProto;
+static const int kNetReqProtoFieldNumber = 1202;
 extern ::google::protobuf::internal::ExtensionIdentifier<
     ::google::protobuf::EnumValueOptions, ::google::protobuf::internal::StringTypeTraits, 9,
     false>
     NetReqProto;
-static const int kNetRspProtoFieldNumber = 1202;
+static const int kNetRspProtoFieldNumber = 1203;
 extern ::google::protobuf::internal::ExtensionIdentifier<
     ::google::protobuf::EnumValueOptions, ::google::protobuf::internal::StringTypeTraits, 9,
     false>

@@ -33,10 +33,11 @@ static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 const char descriptor_table_protodef_Extend_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\014Extend.proto\032 google/protobuf/descript"
-    "or.proto:7\n\013NetReqProto\022!.google.protobu"
-    "f.EnumValueOptions\030\261\t \001(\t:7\n\013NetRspProto"
-    "\022!.google.protobuf.EnumValueOptions\030\262\t \001"
-    "(\tb\006proto3"
+    "or.proto:9\n\rSpecificProto\022!.google.proto"
+    "buf.EnumValueOptions\030\261\t \001(\010:7\n\013NetReqPro"
+    "to\022!.google.protobuf.EnumValueOptions\030\262\t"
+    " \001(\t:7\n\013NetRspProto\022!.google.protobuf.En"
+    "umValueOptions\030\263\t \001(\tb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_Extend_2eproto_deps[1] =
     {
@@ -46,7 +47,7 @@ static ::absl::once_flag descriptor_table_Extend_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Extend_2eproto = {
     false,
     false,
-    170,
+    229,
     descriptor_table_protodef_Extend_2eproto,
     "Extend.proto",
     &descriptor_table_Extend_2eproto_once,
@@ -59,6 +60,11 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Extend_2eproto
     file_level_enum_descriptors_Extend_2eproto,
     file_level_service_descriptors_Extend_2eproto,
 };
+PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 ::_pbi::
+        ExtensionIdentifier<::google::protobuf::EnumValueOptions, ::_pbi::PrimitiveTypeTraits< bool >,
+                            8, false>
+            SpecificProto(kSpecificProtoFieldNumber, false);
 const std::string NetReqProto_default("");
 PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 ::_pbi::
@@ -81,10 +87,13 @@ PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::std::false_type
     _static_init2_ PROTOBUF_UNUSED =
         (::_pbi::AddDescriptors(&descriptor_table_Extend_2eproto),
         ::_pbi::ExtensionSet::RegisterExtension(
-            &::google::protobuf::EnumValueOptions::default_instance(), 1201, 9,
+            &::google::protobuf::EnumValueOptions::default_instance(), 1201, 8,
             false, false),
         ::_pbi::ExtensionSet::RegisterExtension(
             &::google::protobuf::EnumValueOptions::default_instance(), 1202, 9,
+            false, false),
+        ::_pbi::ExtensionSet::RegisterExtension(
+            &::google::protobuf::EnumValueOptions::default_instance(), 1203, 9,
             false, false),
          ::std::false_type{});
 #include "google/protobuf/port_undef.inc"

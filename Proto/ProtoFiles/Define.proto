@@ -4,8 +4,11 @@ package NFProto;
 
 enum MsgMainIdEnum{
     Invalid = 0;
-    HeatBeat = 1;
+    HeatBeat = 1[
+        (SpecificProto) = false
+    ];
     DailyAsk = 2[
+        (SpecificProto) = true,
         (NetReqProto) = "NFProto.C2SDailyAsk",
         (NetRspProto) = "NFProto.S2CDailyAsk"
     ];

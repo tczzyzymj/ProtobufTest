@@ -24,11 +24,11 @@ namespace NFProto {
     static DefineReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxEZWZpbmUucHJvdG8SB05GUHJvdG8aDEV4dGVuZC5wcm90bypmCg1Nc2dN",
-            "YWluSWRFbnVtEgsKB0ludmFsaWQQABIMCghIZWF0QmVhdBABEjoKCERhaWx5",
-            "QXNrEAIaLIpLE05GUHJvdG8uQzJTRGFpbHlBc2uSSxNORlByb3RvLlMyQ0Rh",
-            "aWx5QXNrKh4KDE1zZ1N1YklkRW51bRIOCgpOb1NwZWNpZmljEABiBnByb3Rv",
-            "Mw=="));
+            "CgxEZWZpbmUucHJvdG8SB05GUHJvdG8aDEV4dGVuZC5wcm90bypuCg1Nc2dN",
+            "YWluSWRFbnVtEgsKB0ludmFsaWQQABIRCghIZWF0QmVhdBABGgOISwASPQoI",
+            "RGFpbHlBc2sQAhoviEsBkksTTkZQcm90by5DMlNEYWlseUFza5pLE05GUHJv",
+            "dG8uUzJDRGFpbHlBc2sqHgoMTXNnU3ViSWRFbnVtEg4KCk5vU3BlY2lmaWMQ",
+            "AGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::ExtendReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFProto.MsgMainIdEnum), typeof(global::NFProto.MsgSubIdEnum), }, null, null));
