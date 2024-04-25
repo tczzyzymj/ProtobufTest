@@ -1,4 +1,5 @@
 syntax = "proto3";
+package NFProto;
 
 message C2SDailyAsk{
     string Content=1;

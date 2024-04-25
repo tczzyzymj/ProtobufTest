@@ -1,5 +1,6 @@
 syntax = "proto3";
 import "Define.proto";
+package NFProto;
 
 message NetMsg{
     MsgMainIdEnum MsgMainId = 1;
