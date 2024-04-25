@@ -23,6 +23,7 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
+namespace NFProto {
 
 inline constexpr S2CDailyAsk::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -65,6 +66,7 @@ struct C2SDailyAskDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 C2SDailyAskDefaultTypeInternal _C2SDailyAsk_default_instance_;
+}  // namespace NFProto
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_DailyAsk_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor**
@@ -73,45 +75,45 @@ const ::uint32_t
     TableStruct_DailyAsk_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
         protodesc_cold) = {
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::C2SDailyAsk, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::NFProto::C2SDailyAsk, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::C2SDailyAsk, _impl_.content_),
+        PROTOBUF_FIELD_OFFSET(::NFProto::C2SDailyAsk, _impl_.content_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::S2CDailyAsk, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::NFProto::S2CDailyAsk, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::S2CDailyAsk, _impl_.content_),
+        PROTOBUF_FIELD_OFFSET(::NFProto::S2CDailyAsk, _impl_.content_),
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, -1, -1, sizeof(::C2SDailyAsk)},
-        {9, -1, -1, sizeof(::S2CDailyAsk)},
+        {0, -1, -1, sizeof(::NFProto::C2SDailyAsk)},
+        {9, -1, -1, sizeof(::NFProto::S2CDailyAsk)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
-    &::_C2SDailyAsk_default_instance_._instance,
-    &::_S2CDailyAsk_default_instance_._instance,
+    &::NFProto::_C2SDailyAsk_default_instance_._instance,
+    &::NFProto::_S2CDailyAsk_default_instance_._instance,
 };
 const char descriptor_table_protodef_DailyAsk_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\016DailyAsk.proto\"\036\n\013C2SDailyAsk\022\017\n\007Conte"
-    "nt\030\001 \001(\t\"\036\n\013S2CDailyAsk\022\017\n\007Content\030\002 \001(\t"
-    "b\006proto3"
+    "\n\016DailyAsk.proto\022\007NFProto\"\036\n\013C2SDailyAsk"
+    "\022\017\n\007Content\030\001 \001(\t\"\036\n\013S2CDailyAsk\022\017\n\007Cont"
+    "ent\030\002 \001(\tb\006proto3"
 };
 static ::absl::once_flag descriptor_table_DailyAsk_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_DailyAsk_2eproto = {
     false,
     false,
-    88,
+    97,
     descriptor_table_protodef_DailyAsk_2eproto,
     "DailyAsk.proto",
     &descriptor_table_DailyAsk_2eproto_once,
@@ -124,6 +126,7 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_DailyAsk_2epro
     file_level_enum_descriptors_DailyAsk_2eproto,
     file_level_service_descriptors_DailyAsk_2eproto,
 };
+namespace NFProto {
 // ===================================================================
 
 class C2SDailyAsk::_Internal {
@@ -133,11 +136,11 @@ class C2SDailyAsk::_Internal {
 C2SDailyAsk::C2SDailyAsk(::google::protobuf::Arena* arena)
     : ::google::protobuf::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:C2SDailyAsk)
+  // @@protoc_insertion_point(arena_constructor:NFProto.C2SDailyAsk)
 }
 inline PROTOBUF_NDEBUG_INLINE C2SDailyAsk::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::C2SDailyAsk& from_msg)
+    const Impl_& from, const ::NFProto::C2SDailyAsk& from_msg)
       : content_(arena, from.content_),
         _cached_size_{0} {}
 
@@ -151,7 +154,7 @@ C2SDailyAsk::C2SDailyAsk(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
 
-  // @@protoc_insertion_point(copy_constructor:C2SDailyAsk)
+  // @@protoc_insertion_point(copy_constructor:NFProto.C2SDailyAsk)
 }
 inline PROTOBUF_NDEBUG_INLINE C2SDailyAsk::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -163,7 +166,7 @@ inline void C2SDailyAsk::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
 C2SDailyAsk::~C2SDailyAsk() {
-  // @@protoc_insertion_point(destructor:C2SDailyAsk)
+  // @@protoc_insertion_point(destructor:NFProto.C2SDailyAsk)
   _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
@@ -194,7 +197,7 @@ C2SDailyAsk::GetClassData() const {
   return _data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 27, 2> C2SDailyAsk::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 35, 2> C2SDailyAsk::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -209,7 +212,7 @@ const ::_pbi::TcParseTable<0, 1, 0, 27, 2> C2SDailyAsk::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::C2SDailyAsk>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::NFProto::C2SDailyAsk>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // string Content = 1;
@@ -224,14 +227,14 @@ const ::_pbi::TcParseTable<0, 1, 0, 27, 2> C2SDailyAsk::_table_ = {
   }},
   // no aux_entries
   {{
-    "\13\7\0\0\0\0\0\0"
-    "C2SDailyAsk"
+    "\23\7\0\0\0\0\0\0"
+    "NFProto.C2SDailyAsk"
     "Content"
   }},
 };
 
 PROTOBUF_NOINLINE void C2SDailyAsk::Clear() {
-// @@protoc_insertion_point(message_clear_start:C2SDailyAsk)
+// @@protoc_insertion_point(message_clear_start:NFProto.C2SDailyAsk)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -244,7 +247,7 @@ PROTOBUF_NOINLINE void C2SDailyAsk::Clear() {
 ::uint8_t* C2SDailyAsk::_InternalSerialize(
     ::uint8_t* target,
     ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:C2SDailyAsk)
+  // @@protoc_insertion_point(serialize_to_array_start:NFProto.C2SDailyAsk)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
@@ -252,7 +255,7 @@ PROTOBUF_NOINLINE void C2SDailyAsk::Clear() {
   if (!this->_internal_content().empty()) {
     const std::string& _s = this->_internal_content();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "C2SDailyAsk.Content");
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "NFProto.C2SDailyAsk.Content");
     target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
@@ -261,12 +264,12 @@ PROTOBUF_NOINLINE void C2SDailyAsk::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:C2SDailyAsk)
+  // @@protoc_insertion_point(serialize_to_array_end:NFProto.C2SDailyAsk)
   return target;
 }
 
 ::size_t C2SDailyAsk::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:C2SDailyAsk)
+// @@protoc_insertion_point(message_byte_size_start:NFProto.C2SDailyAsk)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -286,7 +289,7 @@ PROTOBUF_NOINLINE void C2SDailyAsk::Clear() {
 void C2SDailyAsk::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<C2SDailyAsk*>(&to_msg);
   auto& from = static_cast<const C2SDailyAsk&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:C2SDailyAsk)
+  // @@protoc_insertion_point(class_specific_merge_from_start:NFProto.C2SDailyAsk)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -298,7 +301,7 @@ void C2SDailyAsk::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goo
 }
 
 void C2SDailyAsk::CopyFrom(const C2SDailyAsk& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:C2SDailyAsk)
+// @@protoc_insertion_point(class_specific_copy_from_start:NFProto.C2SDailyAsk)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -325,11 +328,11 @@ class S2CDailyAsk::_Internal {
 S2CDailyAsk::S2CDailyAsk(::google::protobuf::Arena* arena)
     : ::google::protobuf::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:S2CDailyAsk)
+  // @@protoc_insertion_point(arena_constructor:NFProto.S2CDailyAsk)
 }
 inline PROTOBUF_NDEBUG_INLINE S2CDailyAsk::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::S2CDailyAsk& from_msg)
+    const Impl_& from, const ::NFProto::S2CDailyAsk& from_msg)
       : content_(arena, from.content_),
         _cached_size_{0} {}
 
@@ -343,7 +346,7 @@ S2CDailyAsk::S2CDailyAsk(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
 
-  // @@protoc_insertion_point(copy_constructor:S2CDailyAsk)
+  // @@protoc_insertion_point(copy_constructor:NFProto.S2CDailyAsk)
 }
 inline PROTOBUF_NDEBUG_INLINE S2CDailyAsk::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -355,7 +358,7 @@ inline void S2CDailyAsk::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
 S2CDailyAsk::~S2CDailyAsk() {
-  // @@protoc_insertion_point(destructor:S2CDailyAsk)
+  // @@protoc_insertion_point(destructor:NFProto.S2CDailyAsk)
   _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
@@ -386,7 +389,7 @@ S2CDailyAsk::GetClassData() const {
   return _data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 27, 2> S2CDailyAsk::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 35, 2> S2CDailyAsk::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -401,7 +404,7 @@ const ::_pbi::TcParseTable<0, 1, 0, 27, 2> S2CDailyAsk::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::S2CDailyAsk>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::NFProto::S2CDailyAsk>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // string Content = 2;
@@ -416,14 +419,14 @@ const ::_pbi::TcParseTable<0, 1, 0, 27, 2> S2CDailyAsk::_table_ = {
   }},
   // no aux_entries
   {{
-    "\13\7\0\0\0\0\0\0"
-    "S2CDailyAsk"
+    "\23\7\0\0\0\0\0\0"
+    "NFProto.S2CDailyAsk"
     "Content"
   }},
 };
 
 PROTOBUF_NOINLINE void S2CDailyAsk::Clear() {
-// @@protoc_insertion_point(message_clear_start:S2CDailyAsk)
+// @@protoc_insertion_point(message_clear_start:NFProto.S2CDailyAsk)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -436,7 +439,7 @@ PROTOBUF_NOINLINE void S2CDailyAsk::Clear() {
 ::uint8_t* S2CDailyAsk::_InternalSerialize(
     ::uint8_t* target,
     ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:S2CDailyAsk)
+  // @@protoc_insertion_point(serialize_to_array_start:NFProto.S2CDailyAsk)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
@@ -444,7 +447,7 @@ PROTOBUF_NOINLINE void S2CDailyAsk::Clear() {
   if (!this->_internal_content().empty()) {
     const std::string& _s = this->_internal_content();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "S2CDailyAsk.Content");
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "NFProto.S2CDailyAsk.Content");
     target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
@@ -453,12 +456,12 @@ PROTOBUF_NOINLINE void S2CDailyAsk::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:S2CDailyAsk)
+  // @@protoc_insertion_point(serialize_to_array_end:NFProto.S2CDailyAsk)
   return target;
 }
 
 ::size_t S2CDailyAsk::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:S2CDailyAsk)
+// @@protoc_insertion_point(message_byte_size_start:NFProto.S2CDailyAsk)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -478,7 +481,7 @@ PROTOBUF_NOINLINE void S2CDailyAsk::Clear() {
 void S2CDailyAsk::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<S2CDailyAsk*>(&to_msg);
   auto& from = static_cast<const S2CDailyAsk&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:S2CDailyAsk)
+  // @@protoc_insertion_point(class_specific_merge_from_start:NFProto.S2CDailyAsk)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -490,7 +493,7 @@ void S2CDailyAsk::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goo
 }
 
 void S2CDailyAsk::CopyFrom(const S2CDailyAsk& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:S2CDailyAsk)
+// @@protoc_insertion_point(class_specific_copy_from_start:NFProto.S2CDailyAsk)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -509,6 +512,7 @@ void S2CDailyAsk::InternalSwap(S2CDailyAsk* PROTOBUF_RESTRICT other) {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NFProto
 namespace google {
 namespace protobuf {
 }  // namespace protobuf

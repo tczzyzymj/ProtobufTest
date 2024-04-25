@@ -23,6 +23,8 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
+namespace NFProto {
+}  // namespace NFProto
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Define_2eproto[2];
 static constexpr const ::_pb::ServiceDescriptor**
     file_level_service_descriptors_Define_2eproto = nullptr;
@@ -31,20 +33,26 @@ static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
 static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 const char descriptor_table_protodef_Define_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\014Define.proto*8\n\rMsgMainIdEnum\022\013\n\007Inval"
-    "id\020\000\022\014\n\010HeatBeat\020\001\022\014\n\010DailyAsk\020\002*\036\n\014MsgS"
-    "ubIdEnum\022\016\n\nNoSpecific\020\000b\006proto3"
+    "\n\014Define.proto\022\007NFProto\032\014Extend.proto*f\n"
+    "\rMsgMainIdEnum\022\013\n\007Invalid\020\000\022\014\n\010HeatBeat\020"
+    "\001\022:\n\010DailyAsk\020\002\032,\212K\023NFProto.C2SDailyAsk\222"
+    "K\023NFProto.S2CDailyAsk*\036\n\014MsgSubIdEnum\022\016\n"
+    "\nNoSpecific\020\000b\006proto3"
+};
+static const ::_pbi::DescriptorTable* const descriptor_table_Define_2eproto_deps[1] =
+    {
+        &::descriptor_table_Extend_2eproto,
 };
 static ::absl::once_flag descriptor_table_Define_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Define_2eproto = {
     false,
     false,
-    112,
+    181,
     descriptor_table_protodef_Define_2eproto,
     "Define.proto",
     &descriptor_table_Define_2eproto_once,
-    nullptr,
-    0,
+    descriptor_table_Define_2eproto_deps,
+    1,
     0,
     schemas,
     file_default_instances,
@@ -52,6 +60,7 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Define_2eproto
     file_level_enum_descriptors_Define_2eproto,
     file_level_service_descriptors_Define_2eproto,
 };
+namespace NFProto {
 const ::google::protobuf::EnumDescriptor* MsgMainIdEnum_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_Define_2eproto);
   return file_level_enum_descriptors_Define_2eproto[0];
@@ -71,6 +80,7 @@ bool MsgSubIdEnum_IsValid(int value) {
   return 0 <= value && value <= 0;
 }
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NFProto
 namespace google {
 namespace protobuf {
 }  // namespace protobuf

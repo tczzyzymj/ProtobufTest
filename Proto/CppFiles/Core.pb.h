@@ -50,14 +50,17 @@ struct TableStruct_Core_2eproto {
 };
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_Core_2eproto;
+namespace NFProto {
 class NetMsg;
 struct NetMsgDefaultTypeInternal;
 extern NetMsgDefaultTypeInternal _NetMsg_default_instance_;
+}  // namespace NFProto
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
+namespace NFProto {
 
 // ===================================================================
 
@@ -65,7 +68,7 @@ namespace protobuf {
 // -------------------------------------------------------------------
 
 class NetMsg final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:NetMsg) */ {
+/* @@protoc_insertion_point(class_definition:NFProto.NetMsg) */ {
  public:
   inline NetMsg() : NetMsg(nullptr) {}
   ~NetMsg() override;
@@ -171,7 +174,7 @@ class NetMsg final : public ::google::protobuf::Message
   void InternalSwap(NetMsg* other);
  private:
   friend class ::google::protobuf::internal::AnyMetadata;
-  static ::absl::string_view FullMessageName() { return "NetMsg"; }
+  static ::absl::string_view FullMessageName() { return "NFProto.NetMsg"; }
 
  protected:
   explicit NetMsg(::google::protobuf::Arena* arena);
@@ -208,14 +211,14 @@ class NetMsg final : public ::google::protobuf::Message
   std::string* _internal_mutable_msgcontent();
 
   public:
-  // .MsgMainIdEnum MsgMainId = 1;
+  // .NFProto.MsgMainIdEnum MsgMainId = 1;
   void clear_msgmainid() ;
-  ::MsgMainIdEnum msgmainid() const;
-  void set_msgmainid(::MsgMainIdEnum value);
+  ::NFProto::MsgMainIdEnum msgmainid() const;
+  void set_msgmainid(::NFProto::MsgMainIdEnum value);
 
   private:
-  ::MsgMainIdEnum _internal_msgmainid() const;
-  void _internal_set_msgmainid(::MsgMainIdEnum value);
+  ::NFProto::MsgMainIdEnum _internal_msgmainid() const;
+  void _internal_set_msgmainid(::NFProto::MsgMainIdEnum value);
 
   public:
   // int32 MsgSubId = 2;
@@ -228,7 +231,7 @@ class NetMsg final : public ::google::protobuf::Message
   void _internal_set_msgsubid(::int32_t value);
 
   public:
-  // @@protoc_insertion_point(class_scope:NetMsg)
+  // @@protoc_insertion_point(class_scope:NFProto.NetMsg)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -280,24 +283,24 @@ class NetMsg final : public ::google::protobuf::Message
 
 // NetMsg
 
-// .MsgMainIdEnum MsgMainId = 1;
+// .NFProto.MsgMainIdEnum MsgMainId = 1;
 inline void NetMsg::clear_msgmainid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.msgmainid_ = 0;
 }
-inline ::MsgMainIdEnum NetMsg::msgmainid() const {
-  // @@protoc_insertion_point(field_get:NetMsg.MsgMainId)
+inline ::NFProto::MsgMainIdEnum NetMsg::msgmainid() const {
+  // @@protoc_insertion_point(field_get:NFProto.NetMsg.MsgMainId)
   return _internal_msgmainid();
 }
-inline void NetMsg::set_msgmainid(::MsgMainIdEnum value) {
+inline void NetMsg::set_msgmainid(::NFProto::MsgMainIdEnum value) {
   _internal_set_msgmainid(value);
-  // @@protoc_insertion_point(field_set:NetMsg.MsgMainId)
+  // @@protoc_insertion_point(field_set:NFProto.NetMsg.MsgMainId)
 }
-inline ::MsgMainIdEnum NetMsg::_internal_msgmainid() const {
+inline ::NFProto::MsgMainIdEnum NetMsg::_internal_msgmainid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return static_cast<::MsgMainIdEnum>(_impl_.msgmainid_);
+  return static_cast<::NFProto::MsgMainIdEnum>(_impl_.msgmainid_);
 }
-inline void NetMsg::_internal_set_msgmainid(::MsgMainIdEnum value) {
+inline void NetMsg::_internal_set_msgmainid(::NFProto::MsgMainIdEnum value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.msgmainid_ = value;
 }
@@ -308,12 +311,12 @@ inline void NetMsg::clear_msgsubid() {
   _impl_.msgsubid_ = 0;
 }
 inline ::int32_t NetMsg::msgsubid() const {
-  // @@protoc_insertion_point(field_get:NetMsg.MsgSubId)
+  // @@protoc_insertion_point(field_get:NFProto.NetMsg.MsgSubId)
   return _internal_msgsubid();
 }
 inline void NetMsg::set_msgsubid(::int32_t value) {
   _internal_set_msgsubid(value);
-  // @@protoc_insertion_point(field_set:NetMsg.MsgSubId)
+  // @@protoc_insertion_point(field_set:NFProto.NetMsg.MsgSubId)
 }
 inline ::int32_t NetMsg::_internal_msgsubid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -331,7 +334,7 @@ inline void NetMsg::clear_msgcontent() {
 }
 inline const std::string& NetMsg::msgcontent() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:NetMsg.MsgContent)
+  // @@protoc_insertion_point(field_get:NFProto.NetMsg.MsgContent)
   return _internal_msgcontent();
 }
 template <typename Arg_, typename... Args_>
@@ -339,11 +342,11 @@ inline PROTOBUF_ALWAYS_INLINE void NetMsg::set_msgcontent(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.msgcontent_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:NetMsg.MsgContent)
+  // @@protoc_insertion_point(field_set:NFProto.NetMsg.MsgContent)
 }
 inline std::string* NetMsg::mutable_msgcontent() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   std::string* _s = _internal_mutable_msgcontent();
-  // @@protoc_insertion_point(field_mutable:NetMsg.MsgContent)
+  // @@protoc_insertion_point(field_mutable:NFProto.NetMsg.MsgContent)
   return _s;
 }
 inline const std::string& NetMsg::_internal_msgcontent() const {
@@ -360,7 +363,7 @@ inline std::string* NetMsg::_internal_mutable_msgcontent() {
 }
 inline std::string* NetMsg::release_msgcontent() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:NetMsg.MsgContent)
+  // @@protoc_insertion_point(field_release:NFProto.NetMsg.MsgContent)
   return _impl_.msgcontent_.Release();
 }
 inline void NetMsg::set_allocated_msgcontent(std::string* value) {
@@ -371,7 +374,7 @@ inline void NetMsg::set_allocated_msgcontent(std::string* value) {
           _impl_.msgcontent_.Set("", GetArena());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:NetMsg.MsgContent)
+  // @@protoc_insertion_point(field_set_allocated:NFProto.NetMsg.MsgContent)
 }
 
 #ifdef __GNUC__
@@ -379,6 +382,7 @@ inline void NetMsg::set_allocated_msgcontent(std::string* value) {
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NFProto
 
 
 // @@protoc_insertion_point(global_scope)

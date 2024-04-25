@@ -23,13 +23,14 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
+namespace NFProto {
 
 inline constexpr NetMsg::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : msgcontent_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
-        msgmainid_{static_cast< ::MsgMainIdEnum >(0)},
+        msgmainid_{static_cast< ::NFProto::MsgMainIdEnum >(0)},
         msgsubid_{0},
         _cached_size_{0} {}
 
@@ -46,6 +47,7 @@ struct NetMsgDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 NetMsgDefaultTypeInternal _NetMsg_default_instance_;
+}  // namespace NFProto
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_Core_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor**
@@ -54,30 +56,31 @@ const ::uint32_t
     TableStruct_Core_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
         protodesc_cold) = {
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::NetMsg, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::NFProto::NetMsg, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::NetMsg, _impl_.msgmainid_),
-        PROTOBUF_FIELD_OFFSET(::NetMsg, _impl_.msgsubid_),
-        PROTOBUF_FIELD_OFFSET(::NetMsg, _impl_.msgcontent_),
+        PROTOBUF_FIELD_OFFSET(::NFProto::NetMsg, _impl_.msgmainid_),
+        PROTOBUF_FIELD_OFFSET(::NFProto::NetMsg, _impl_.msgsubid_),
+        PROTOBUF_FIELD_OFFSET(::NFProto::NetMsg, _impl_.msgcontent_),
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, -1, -1, sizeof(::NetMsg)},
+        {0, -1, -1, sizeof(::NFProto::NetMsg)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
-    &::_NetMsg_default_instance_._instance,
+    &::NFProto::_NetMsg_default_instance_._instance,
 };
 const char descriptor_table_protodef_Core_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\nCore.proto\032\014Define.proto\"Q\n\006NetMsg\022!\n\t"
-    "MsgMainId\030\001 \001(\0162\016.MsgMainIdEnum\022\020\n\010MsgSu"
-    "bId\030\002 \001(\005\022\022\n\nMsgContent\030\003 \001(\014b\006proto3"
+    "\n\nCore.proto\022\007NFProto\032\014Define.proto\"Y\n\006N"
+    "etMsg\022)\n\tMsgMainId\030\001 \001(\0162\026.NFProto.MsgMa"
+    "inIdEnum\022\020\n\010MsgSubId\030\002 \001(\005\022\022\n\nMsgContent"
+    "\030\003 \001(\014b\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_Core_2eproto_deps[1] =
     {
@@ -87,7 +90,7 @@ static ::absl::once_flag descriptor_table_Core_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Core_2eproto = {
     false,
     false,
-    117,
+    134,
     descriptor_table_protodef_Core_2eproto,
     "Core.proto",
     &descriptor_table_Core_2eproto_once,
@@ -100,6 +103,7 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Core_2eproto =
     file_level_enum_descriptors_Core_2eproto,
     file_level_service_descriptors_Core_2eproto,
 };
+namespace NFProto {
 // ===================================================================
 
 class NetMsg::_Internal {
@@ -109,11 +113,11 @@ class NetMsg::_Internal {
 NetMsg::NetMsg(::google::protobuf::Arena* arena)
     : ::google::protobuf::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:NetMsg)
+  // @@protoc_insertion_point(arena_constructor:NFProto.NetMsg)
 }
 inline PROTOBUF_NDEBUG_INLINE NetMsg::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::NetMsg& from_msg)
+    const Impl_& from, const ::NFProto::NetMsg& from_msg)
       : msgcontent_(arena, from.msgcontent_),
         _cached_size_{0} {}
 
@@ -134,7 +138,7 @@ NetMsg::NetMsg(
                offsetof(Impl_, msgmainid_) +
                sizeof(Impl_::msgsubid_));
 
-  // @@protoc_insertion_point(copy_constructor:NetMsg)
+  // @@protoc_insertion_point(copy_constructor:NFProto.NetMsg)
 }
 inline PROTOBUF_NDEBUG_INLINE NetMsg::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -152,7 +156,7 @@ inline void NetMsg::SharedCtor(::_pb::Arena* arena) {
                sizeof(Impl_::msgsubid_));
 }
 NetMsg::~NetMsg() {
-  // @@protoc_insertion_point(destructor:NetMsg)
+  // @@protoc_insertion_point(destructor:NFProto.NetMsg)
   _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
@@ -198,11 +202,11 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> NetMsg::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::NetMsg>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::NFProto::NetMsg>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
-    // .MsgMainIdEnum MsgMainId = 1;
+    // .NFProto.MsgMainIdEnum MsgMainId = 1;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(NetMsg, _impl_.msgmainid_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(NetMsg, _impl_.msgmainid_)}},
     // int32 MsgSubId = 2;
@@ -214,7 +218,7 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> NetMsg::_table_ = {
   }}, {{
     65535, 65535
   }}, {{
-    // .MsgMainIdEnum MsgMainId = 1;
+    // .NFProto.MsgMainIdEnum MsgMainId = 1;
     {PROTOBUF_FIELD_OFFSET(NetMsg, _impl_.msgmainid_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
     // int32 MsgSubId = 2;
@@ -230,7 +234,7 @@ const ::_pbi::TcParseTable<2, 3, 0, 0, 2> NetMsg::_table_ = {
 };
 
 PROTOBUF_NOINLINE void NetMsg::Clear() {
-// @@protoc_insertion_point(message_clear_start:NetMsg)
+// @@protoc_insertion_point(message_clear_start:NFProto.NetMsg)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -246,11 +250,11 @@ PROTOBUF_NOINLINE void NetMsg::Clear() {
 ::uint8_t* NetMsg::_InternalSerialize(
     ::uint8_t* target,
     ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:NetMsg)
+  // @@protoc_insertion_point(serialize_to_array_start:NFProto.NetMsg)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
-  // .MsgMainIdEnum MsgMainId = 1;
+  // .NFProto.MsgMainIdEnum MsgMainId = 1;
   if (this->_internal_msgmainid() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
@@ -275,12 +279,12 @@ PROTOBUF_NOINLINE void NetMsg::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NetMsg)
+  // @@protoc_insertion_point(serialize_to_array_end:NFProto.NetMsg)
   return target;
 }
 
 ::size_t NetMsg::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NetMsg)
+// @@protoc_insertion_point(message_byte_size_start:NFProto.NetMsg)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -294,7 +298,7 @@ PROTOBUF_NOINLINE void NetMsg::Clear() {
                                     this->_internal_msgcontent());
   }
 
-  // .MsgMainIdEnum MsgMainId = 1;
+  // .NFProto.MsgMainIdEnum MsgMainId = 1;
   if (this->_internal_msgmainid() != 0) {
     total_size += 1 +
                   ::_pbi::WireFormatLite::EnumSize(this->_internal_msgmainid());
@@ -313,7 +317,7 @@ PROTOBUF_NOINLINE void NetMsg::Clear() {
 void NetMsg::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<NetMsg*>(&to_msg);
   auto& from = static_cast<const NetMsg&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:NetMsg)
+  // @@protoc_insertion_point(class_specific_merge_from_start:NFProto.NetMsg)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -331,7 +335,7 @@ void NetMsg::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::
 }
 
 void NetMsg::CopyFrom(const NetMsg& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NetMsg)
+// @@protoc_insertion_point(class_specific_copy_from_start:NFProto.NetMsg)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -356,6 +360,7 @@ void NetMsg::InternalSwap(NetMsg* PROTOBUF_RESTRICT other) {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NFProto
 namespace google {
 namespace protobuf {
 }  // namespace protobuf

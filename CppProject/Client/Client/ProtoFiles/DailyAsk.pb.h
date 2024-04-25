@@ -49,17 +49,20 @@ struct TableStruct_DailyAsk_2eproto {
 };
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_DailyAsk_2eproto;
+namespace NFProto {
 class C2SDailyAsk;
 struct C2SDailyAskDefaultTypeInternal;
 extern C2SDailyAskDefaultTypeInternal _C2SDailyAsk_default_instance_;
 class S2CDailyAsk;
 struct S2CDailyAskDefaultTypeInternal;
 extern S2CDailyAskDefaultTypeInternal _S2CDailyAsk_default_instance_;
+}  // namespace NFProto
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
+namespace NFProto {
 
 // ===================================================================
 
@@ -67,7 +70,7 @@ namespace protobuf {
 // -------------------------------------------------------------------
 
 class S2CDailyAsk final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:S2CDailyAsk) */ {
+/* @@protoc_insertion_point(class_definition:NFProto.S2CDailyAsk) */ {
  public:
   inline S2CDailyAsk() : S2CDailyAsk(nullptr) {}
   ~S2CDailyAsk() override;
@@ -173,7 +176,7 @@ class S2CDailyAsk final : public ::google::protobuf::Message
   void InternalSwap(S2CDailyAsk* other);
  private:
   friend class ::google::protobuf::internal::AnyMetadata;
-  static ::absl::string_view FullMessageName() { return "S2CDailyAsk"; }
+  static ::absl::string_view FullMessageName() { return "NFProto.S2CDailyAsk"; }
 
  protected:
   explicit S2CDailyAsk(::google::protobuf::Arena* arena);
@@ -208,13 +211,13 @@ class S2CDailyAsk final : public ::google::protobuf::Message
   std::string* _internal_mutable_content();
 
   public:
-  // @@protoc_insertion_point(class_scope:S2CDailyAsk)
+  // @@protoc_insertion_point(class_scope:NFProto.S2CDailyAsk)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       0, 1, 0,
-      27, 2>
+      35, 2>
       _table_;
 
   static constexpr const void* _raw_default_instance_ =
@@ -244,7 +247,7 @@ class S2CDailyAsk final : public ::google::protobuf::Message
 // -------------------------------------------------------------------
 
 class C2SDailyAsk final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:C2SDailyAsk) */ {
+/* @@protoc_insertion_point(class_definition:NFProto.C2SDailyAsk) */ {
  public:
   inline C2SDailyAsk() : C2SDailyAsk(nullptr) {}
   ~C2SDailyAsk() override;
@@ -350,7 +353,7 @@ class C2SDailyAsk final : public ::google::protobuf::Message
   void InternalSwap(C2SDailyAsk* other);
  private:
   friend class ::google::protobuf::internal::AnyMetadata;
-  static ::absl::string_view FullMessageName() { return "C2SDailyAsk"; }
+  static ::absl::string_view FullMessageName() { return "NFProto.C2SDailyAsk"; }
 
  protected:
   explicit C2SDailyAsk(::google::protobuf::Arena* arena);
@@ -385,13 +388,13 @@ class C2SDailyAsk final : public ::google::protobuf::Message
   std::string* _internal_mutable_content();
 
   public:
-  // @@protoc_insertion_point(class_scope:C2SDailyAsk)
+  // @@protoc_insertion_point(class_scope:NFProto.C2SDailyAsk)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       0, 1, 0,
-      27, 2>
+      35, 2>
       _table_;
 
   static constexpr const void* _raw_default_instance_ =
@@ -442,7 +445,7 @@ inline void C2SDailyAsk::clear_content() {
 }
 inline const std::string& C2SDailyAsk::content() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:C2SDailyAsk.Content)
+  // @@protoc_insertion_point(field_get:NFProto.C2SDailyAsk.Content)
   return _internal_content();
 }
 template <typename Arg_, typename... Args_>
@@ -450,11 +453,11 @@ inline PROTOBUF_ALWAYS_INLINE void C2SDailyAsk::set_content(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.content_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:C2SDailyAsk.Content)
+  // @@protoc_insertion_point(field_set:NFProto.C2SDailyAsk.Content)
 }
 inline std::string* C2SDailyAsk::mutable_content() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   std::string* _s = _internal_mutable_content();
-  // @@protoc_insertion_point(field_mutable:C2SDailyAsk.Content)
+  // @@protoc_insertion_point(field_mutable:NFProto.C2SDailyAsk.Content)
   return _s;
 }
 inline const std::string& C2SDailyAsk::_internal_content() const {
@@ -471,7 +474,7 @@ inline std::string* C2SDailyAsk::_internal_mutable_content() {
 }
 inline std::string* C2SDailyAsk::release_content() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:C2SDailyAsk.Content)
+  // @@protoc_insertion_point(field_release:NFProto.C2SDailyAsk.Content)
   return _impl_.content_.Release();
 }
 inline void C2SDailyAsk::set_allocated_content(std::string* value) {
@@ -482,7 +485,7 @@ inline void C2SDailyAsk::set_allocated_content(std::string* value) {
           _impl_.content_.Set("", GetArena());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:C2SDailyAsk.Content)
+  // @@protoc_insertion_point(field_set_allocated:NFProto.C2SDailyAsk.Content)
 }
 
 // -------------------------------------------------------------------
@@ -496,7 +499,7 @@ inline void S2CDailyAsk::clear_content() {
 }
 inline const std::string& S2CDailyAsk::content() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:S2CDailyAsk.Content)
+  // @@protoc_insertion_point(field_get:NFProto.S2CDailyAsk.Content)
   return _internal_content();
 }
 template <typename Arg_, typename... Args_>
@@ -504,11 +507,11 @@ inline PROTOBUF_ALWAYS_INLINE void S2CDailyAsk::set_content(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.content_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:S2CDailyAsk.Content)
+  // @@protoc_insertion_point(field_set:NFProto.S2CDailyAsk.Content)
 }
 inline std::string* S2CDailyAsk::mutable_content() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   std::string* _s = _internal_mutable_content();
-  // @@protoc_insertion_point(field_mutable:S2CDailyAsk.Content)
+  // @@protoc_insertion_point(field_mutable:NFProto.S2CDailyAsk.Content)
   return _s;
 }
 inline const std::string& S2CDailyAsk::_internal_content() const {
@@ -525,7 +528,7 @@ inline std::string* S2CDailyAsk::_internal_mutable_content() {
 }
 inline std::string* S2CDailyAsk::release_content() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:S2CDailyAsk.Content)
+  // @@protoc_insertion_point(field_release:NFProto.S2CDailyAsk.Content)
   return _impl_.content_.Release();
 }
 inline void S2CDailyAsk::set_allocated_content(std::string* value) {
@@ -536,7 +539,7 @@ inline void S2CDailyAsk::set_allocated_content(std::string* value) {
           _impl_.content_.Set("", GetArena());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:S2CDailyAsk.Content)
+  // @@protoc_insertion_point(field_set_allocated:NFProto.S2CDailyAsk.Content)
 }
 
 #ifdef __GNUC__
@@ -544,6 +547,7 @@ inline void S2CDailyAsk::set_allocated_content(std::string* value) {
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NFProto
 
 
 // @@protoc_insertion_point(global_scope)

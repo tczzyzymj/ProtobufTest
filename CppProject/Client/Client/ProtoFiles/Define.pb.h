@@ -27,6 +27,7 @@
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/generated_enum_reflection.h"
+#include "Extend.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -53,6 +54,7 @@ namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
+namespace NFProto {
 enum MsgMainIdEnum : int {
   Invalid = 0,
   HeatBeat = 1,
@@ -141,22 +143,23 @@ inline bool MsgSubIdEnum_Parse(absl::string_view name, MsgSubIdEnum* value) {
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NFProto
 
 
 namespace google {
 namespace protobuf {
 
 template <>
-struct is_proto_enum<::MsgMainIdEnum> : std::true_type {};
+struct is_proto_enum<::NFProto::MsgMainIdEnum> : std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor<::MsgMainIdEnum>() {
-  return ::MsgMainIdEnum_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor<::NFProto::MsgMainIdEnum>() {
+  return ::NFProto::MsgMainIdEnum_descriptor();
 }
 template <>
-struct is_proto_enum<::MsgSubIdEnum> : std::true_type {};
+struct is_proto_enum<::NFProto::MsgSubIdEnum> : std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor<::MsgSubIdEnum>() {
-  return ::MsgSubIdEnum_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor<::NFProto::MsgSubIdEnum>() {
+  return ::NFProto::MsgSubIdEnum_descriptor();
 }
 
 }  // namespace protobuf
