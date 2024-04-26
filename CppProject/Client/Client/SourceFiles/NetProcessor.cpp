@@ -193,8 +193,10 @@ void NetProcessor::InternalHandleMsg(MsgMainIdEnum InMsgMainIdEnum, int InMsgSub
     if (_msgIns == nullptr)
     {
         std::cout << "协议 Proto ：" << _rspProtoName << ", 无法实例化，请检查" << "\n";
+        return;
     }
 
+    // 这里用 Event 去发送消息，让注册的地方自行处理内容即可
     if (InMsgMainIdEnum == MsgMainIdEnum::DailyAsk)
     {
         S2CDailyAsk* _finalMsg = dynamic_cast<S2CDailyAsk*>(_msgIns);
@@ -211,4 +213,8 @@ void NetProcessor::InternalHandleMsg(MsgMainIdEnum InMsgMainIdEnum, int InMsgSub
         const std::string _replyContent = _finalMsg->content();
         std::cout << _replyContent << "\n";
     }
+
+    _desc = nullptr;
+    delete(_msgIns);
+    _msgIns = nullptr;
 }
