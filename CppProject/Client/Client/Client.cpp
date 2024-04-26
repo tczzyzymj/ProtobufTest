@@ -30,6 +30,19 @@ int main()
         }
     );
 
+    auto _asyncForDailyAsk = std::async(
+        [&]()
+        {
+            while (_process)
+            {
+                NFProto::C2SDailyAsk _msg;
+                _msg.set_content(u8"今天是第几次询问？");
+                _netProcessor->SendMsg(NFProto::MsgMainIdEnum::DailyAsk, 0, &_msg);
+                Sleep(2000);
+            }
+        }
+    );
+
     auto _asyncForHandleMsg = std::async(
         [&]()
         {

@@ -1,6 +1,4 @@
-﻿using Google.Protobuf;
-using Google.Protobuf.Reflection;
-using NFProto;
+﻿using NFProto;
 
 namespace Client
 {
@@ -19,7 +17,7 @@ namespace Client
 
             try
             {
-                Task.Run(
+                Task _taskForHandleMsg = Task.Run(
                     () =>
                     {
                         while (_process)
@@ -29,12 +27,27 @@ namespace Client
                     }
                 );
 
-                Task.Run(
+                Task _taskForHearBeat = Task.Run(
                     async () =>
                     {
                         while (_process)
                         {
                             _netProcessor.SendHearBeat();
+
+                            await Task.Delay(1000);
+                        }
+                    }
+                );
+
+
+                Task _taskForDailyAsk = Task.Run(
+                    async () =>
+                    {
+                        while (_process)
+                        {
+                            C2SDailyAsk _msg = new C2SDailyAsk();
+                            _msg.Content = "今天是第几次询问？";
+                            _netProcessor.SendMsg(MsgMainIdEnum.DailyAsk, 0, _msg);
 
                             await Task.Delay(1000);
                         }
@@ -51,6 +64,10 @@ namespace Client
 
                         break;
                     }
+                }
+
+                while (_taskForHearBeat.Wait(0) || _taskForHandleMsg.Wait(0) || _taskForDailyAsk.Wait(0))
+                {
                 }
             }
             catch (Exception _exception)

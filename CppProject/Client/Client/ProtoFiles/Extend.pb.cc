@@ -23,6 +23,8 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
+namespace NFProto {
+}  // namespace NFProto
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_Extend_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor**
@@ -32,12 +34,12 @@ static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
 static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 const char descriptor_table_protodef_Extend_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\014Extend.proto\032 google/protobuf/descript"
-    "or.proto:9\n\rSpecificProto\022!.google.proto"
-    "buf.EnumValueOptions\030\261\t \001(\010:7\n\013NetReqPro"
-    "to\022!.google.protobuf.EnumValueOptions\030\262\t"
-    " \001(\t:7\n\013NetRspProto\022!.google.protobuf.En"
-    "umValueOptions\030\263\t \001(\tb\006proto3"
+    "\n\014Extend.proto\022\007NFProto\032 google/protobuf"
+    "/descriptor.proto:9\n\rSpecificProto\022!.goo"
+    "gle.protobuf.EnumValueOptions\030\261\t \001(\010:7\n\013"
+    "NetReqProto\022!.google.protobuf.EnumValueO"
+    "ptions\030\262\t \001(\t:7\n\013NetRspProto\022!.google.pr"
+    "otobuf.EnumValueOptions\030\263\t \001(\tb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_Extend_2eproto_deps[1] =
     {
@@ -47,7 +49,7 @@ static ::absl::once_flag descriptor_table_Extend_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Extend_2eproto = {
     false,
     false,
-    229,
+    238,
     descriptor_table_protodef_Extend_2eproto,
     "Extend.proto",
     &descriptor_table_Extend_2eproto_once,
@@ -60,6 +62,7 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_Extend_2eproto
     file_level_enum_descriptors_Extend_2eproto,
     file_level_service_descriptors_Extend_2eproto,
 };
+namespace NFProto {
 PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 ::_pbi::
         ExtensionIdentifier<::google::protobuf::EnumValueOptions, ::_pbi::PrimitiveTypeTraits< bool >,
@@ -78,6 +81,7 @@ PROTOBUF_CONSTINIT
                             9, false>
             NetRspProto(kNetRspProtoFieldNumber, NetRspProto_default);
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NFProto
 namespace google {
 namespace protobuf {
 }  // namespace protobuf

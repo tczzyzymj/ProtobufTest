@@ -4,7 +4,7 @@
 #include "windows.h"
 #include "winsock.h"
 #include <iostream>
-#include "google\protobuf\message.h"
+#include "google/protobuf/message.h"
 #include "Core.pb.h"
 #include "DailyAsk.pb.h"
 
@@ -25,11 +25,24 @@ public:
 
     void SendHeartBeat();
 
-private:
-    SOCKET mSocketClient = NULL;
-    u_short mConnectPort = 9117;
-    const int mSizeOfInt = sizeof(int);
-    const bool mIsBigEndian = static_cast<int>(htonl(1) == 1);
+    ~NetProcessor()
+    {
+        if (mEnumDescriptor != nullptr)
+        {
+            delete(mEnumDescriptor);
+            mEnumDescriptor = nullptr;
+        }
+    }
 
-    void InternalHandleMsg(NFProto::MsgMainIdEnum InMsgMainIdEnum, int InMsgSubId, std::string& InMsgData);
+private:
+    char                                    mReceiveBuffer[1024];
+    char                                    mSendBuffer[1024];
+    const bool                              mIsBigEndian    = static_cast<int>(htonl(1) == 1);
+    const google::protobuf::EnumDescriptor* mEnumDescriptor = nullptr;
+    const int                               mBufferSize     = 1024;
+    const int                               mSizeOfInt      = sizeof(int);
+    SOCKET                                  mSocketClient   = NULL;
+    u_short                                 mConnectPort    = 9117;
+
+    void InternalHandleMsg(NFProto::MsgMainIdEnum InMsgMainIdEnum, int InMsgSubId,const std::string& InMsgData);
 };

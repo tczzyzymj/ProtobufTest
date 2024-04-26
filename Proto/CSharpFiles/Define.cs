@@ -30,7 +30,7 @@ namespace NFProto {
             "dG8uUzJDRGFpbHlBc2sqHgoMTXNnU3ViSWRFbnVtEg4KCk5vU3BlY2lmaWMQ",
             "AGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::ExtendReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::NFProto.ExtendReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NFProto.MsgMainIdEnum), typeof(global::NFProto.MsgSubIdEnum), }, null, null));
     }
     #endregion

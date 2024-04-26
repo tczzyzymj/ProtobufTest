@@ -12,19 +12,19 @@ namespace Client
     {
         private const    int             mBufferSize = 1024;
         private const    string          mIpAddress  = "127.0.0.1";
-        private const    int             mSizeOfInt  = sizeof(ulong);
+        private const    int             mSizeOfInt  = sizeof(int);
         private readonly byte[]          mBuffer     = new byte[mBufferSize];
         private          IPEndPoint?     mIpEndPoint;
         private          MemoryStream?   mMemoryStream;
-        private          byte[]          mMsgBufferSizeBuffer = new byte[mSizeOfInt];
+        private readonly byte[]          mMsgBufferSizeBuffer = new byte[mSizeOfInt];
         private          EnumDescriptor? mMsgMainIdDescriptor;
         private          Socket?         mSocket;
 
         public bool Init()
         {
-            mMemoryStream        = new MemoryStream(mBuffer);
-            mSocket              = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            mIpEndPoint          = new IPEndPoint(IPAddress.Parse(mIpAddress), 9117);
+            mMemoryStream = new MemoryStream(mBuffer);
+            mSocket       = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            mIpEndPoint   = new IPEndPoint(IPAddress.Parse(mIpAddress), 9117);
 
             try
             {
@@ -82,6 +82,12 @@ namespace Client
                     {
                         Array.Clear(mMsgBufferSizeBuffer, 0, mSizeOfInt);
                         mMemoryStream.Read(mMsgBufferSizeBuffer, 0, mSizeOfInt);
+
+                        if (BitConverter.IsLittleEndian)
+                        {
+                            Array.Reverse(mMsgBufferSizeBuffer);
+                        }
+
                         int _msgLength = BitConverter.ToInt32(mMsgBufferSizeBuffer);
 
                         if (_msgLength <= 0)
@@ -158,7 +164,7 @@ namespace Client
             }
 
             byte[] _msgBuffer       = _msg.ToByteArray();
-            int  _msgBufferLength = _msgBuffer.Length;
+            int    _msgBufferLength = _msgBuffer.Length;
             byte[] _finalBuffer     = new byte[_msgBufferLength + mSizeOfInt];
 
             using (MemoryStream _ms = new MemoryStream(_finalBuffer))
@@ -244,16 +250,16 @@ namespace Client
                 return;
             }
 
-            MethodInfo? _method = _propertyInfo.GetType().GetMethod("ParseFrom", BindingFlags.Default, new[] { typeof(ByteString) });
+            MethodInfo? _method = _propertyInfo.PropertyType.GetMethod("ParseFrom", new[] { typeof(ByteString) });
 
             if (_method == null)
             {
-                NFLog.Ins().LogError("错误，类：{} 的 成员 ： {} ，无法获取方法 ParseFrom(ByteString)");
+                NFLog.Ins().LogError($"错误，类：{_rspProtoName} 的 成员 ： Parser ，无法获取方法 ParseFrom(ByteString)");
 
                 return;
             }
 
-            object? _resultObj = _method.Invoke(_propertyInfo, new object[] { InByteString });
+            object? _resultObj = _method.Invoke(_propertyInfo.GetValue(null), new object[] { InByteString });
 
             if ((InMsgMainId == MsgMainIdEnum.DailyAsk) && (_resultObj != null))
             {

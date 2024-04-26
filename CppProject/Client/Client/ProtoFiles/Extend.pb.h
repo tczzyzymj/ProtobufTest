@@ -53,6 +53,7 @@ namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
+namespace NFProto {
 
 // ===================================================================
 
@@ -90,6 +91,7 @@ extern ::google::protobuf::internal::ExtensionIdentifier<
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NFProto
 
 
 // @@protoc_insertion_point(global_scope)

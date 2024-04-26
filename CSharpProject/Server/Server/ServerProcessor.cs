@@ -1,6 +1,9 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
+using Client.Common;
 using Google.Protobuf;
+using Google.Protobuf.Reflection;
 using NFProto;
 
 namespace Server
@@ -14,11 +17,19 @@ namespace Server
         private readonly byte[]                     mIntSizeBuffer   = new byte[mSizeOfInt];
         private readonly int                        mPort            = 9117;
         private          MemoryStream?              mMemoryStream;
+        private          EnumDescriptor?            mMsgMainIdDescriptor;
         private          int                        mReceiveCount;
         private          Socket?                    mServerSocket;
 
         public bool Init()
         {
+            mMsgMainIdDescriptor = DefineReflection.Descriptor.FindTypeByName<EnumDescriptor>(nameof(MsgMainIdEnum));
+
+            if (mMsgMainIdDescriptor == null)
+            {
+                return false;
+            }
+
             mServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             mMemoryStream = new MemoryStream(mBuffer);
@@ -161,7 +172,8 @@ namespace Server
                                 continue;
                             }
 
-                            InternalParseMsg(_netMsg.MsgMainId, _netMsg.MsgContent, _clientSocketValueArray[_i]);
+                            NFLog.Ins().LogInfo($"收到消息, MainId : {_netMsg.MsgMainId}, SubId : {_netMsg.MsgSubId}");
+                            InternalParseMsg(_netMsg, _clientSocketValueArray[_i]);
                         }
                     }
                     catch (SocketException _socketException)
@@ -176,62 +188,125 @@ namespace Server
             }
         }
 
-        public void InternalParseMsg(MsgMainIdEnum msgmainId, ByteString byteString, Socket targetSocket)
+        private void InternalParseMsg(NetMsg InMsg, Socket InSocket)
         {
-            switch (msgmainId)
+            MsgMainIdEnum _msgMainId = InMsg.MsgMainId;
+
+            if (_msgMainId == MsgMainIdEnum.HeatBeat)
             {
-                case MsgMainIdEnum.Invalid:
+                NFLog.Ins().LogInfo($"收到:{InSocket.RemoteEndPoint} 心跳包");
+
+                return;
+            }
+
+            if (mMsgMainIdDescriptor == null)
+            {
+                mMsgMainIdDescriptor = DefineReflection.Descriptor.FindTypeByName<EnumDescriptor>(nameof(MsgMainIdEnum));
+            }
+
+            EnumValueDescriptor? _tempDescriptor = mMsgMainIdDescriptor.FindValueByNumber((int)_msgMainId);
+
+            if (_tempDescriptor == null)
+            {
+                NFLog.Ins().LogError($"没有找到目标 {_msgMainId} 的 Descriptor");
+
+                return;
+            }
+
+            EnumValueOptions? _targetOptions = _tempDescriptor.GetOptions();
+
+            if (_targetOptions == null)
+            {
+                return;
+            }
+
+            bool _specificProto = _targetOptions.GetExtension(ExtendExtensions.SpecificProto);
+
+            if (!_specificProto)
+            {
+                return;
+            }
+
+            string? _rspProtoName = _targetOptions.GetExtension(ExtendExtensions.NetReqProto);
+
+            if (string.IsNullOrEmpty(_rspProtoName))
+            {
+                NFLog.Ins().LogError($"MsgMainIdEnum : {_msgMainId} ，没有Proto对象，请检查");
+
+                return;
+            }
+
+            Type? _type = Type.GetType(_rspProtoName);
+
+            if (_type == null)
+            {
+                NFLog.Ins().LogError($"无法获取指定 Type , class name : {_rspProtoName}");
+
+                return;
+            }
+
+            PropertyInfo? _propertyInfo = _type.GetProperty("Parser");
+
+            if (_propertyInfo == null)
+            {
+                NFLog.Ins().LogError($"无法获取类：{_rspProtoName} 里面的 Parser 属性，请检查");
+
+                return;
+            }
+
+            MethodInfo? _method = _propertyInfo.PropertyType.GetMethod("ParseFrom", new[] { typeof(ByteString) });
+
+            if (_method == null)
+            {
+                NFLog.Ins().LogError($"错误，类：{_rspProtoName} 的 成员 ： Parser ，无法获取方法 ParseFrom(ByteString)");
+
+                return;
+            }
+
+            object? _resultMsgIns = _method.Invoke(_propertyInfo.GetValue(null), new object[] { InMsg.MsgContent });
+
+            if (_resultMsgIns == null)
+            {
+                NFLog.Ins().LogError($"协议反序列化出错，目标类：{_rspProtoName},请检查");
+
+                return;
+            }
+
+            // 这里用 Event 发送要消息给注册了的目标就行，这里是临时的
+            if (_msgMainId == MsgMainIdEnum.DailyAsk)
+            {
+                C2SDailyAsk? _receiveMsg = _resultMsgIns as C2SDailyAsk;
+
+                if (_receiveMsg == null)
                 {
-                    Console.WriteLine("协议转换出错，请检查！");
+                    NFLog.Ins().LogError("消息无法转化为 S2CDailyAsk，请检查");
 
-                    break;
+                    return;
                 }
-                case MsgMainIdEnum.HeatBeat:
-                {
-                    Console.WriteLine("接收心跳包");
 
-                    break;
-                }
-                case MsgMainIdEnum.DailyAsk:
-                {
-                    C2SDailyAsk _msg = C2SDailyAsk.Parser.ParseFrom(byteString);
+                NFLog.Ins().LogInfo($"收到日常询问 : {_receiveMsg.Content}");
 
-                    if (_msg == null)
-                    {
-                        Console.WriteLine("协议无法解析为 MsgDailyAsk ，请检查");
-
-                        return;
-                    }
-
-                    Console.WriteLine(_msg.ToString());
-                    S2CDailyAsk _replyMsg = new S2CDailyAsk();
-                    ++mReceiveCount;
-                    _replyMsg.Content = $"哟西，已收到 {mReceiveCount} 次";
-                    SendMsg(MsgMainIdEnum.DailyAsk, (int)MsgSubIdEnum.NoSpecific, targetSocket, _replyMsg);
-
-                    break;
-                }
-                default:
-                {
-                    throw new ArgumentOutOfRangeException(nameof(msgmainId), msgmainId, null);
-                }
+                S2CDailyAsk _sendMsg = new S2CDailyAsk();
+                ++mReceiveCount;
+                _sendMsg.Content = $"今天是第 {mReceiveCount} 次询问";
+                SendMsg(MsgMainIdEnum.DailyAsk, (int)MsgSubIdEnum.NoSpecific, InSocket, _sendMsg);
             }
         }
 
-        public void SendMsg(MsgMainIdEnum MainIdEnum, int SubIdEnum, Socket TargetSocket, IMessage? TargetMsg)
+        public void SendMsg(MsgMainIdEnum InMsgMainId, int InSubId, Socket InSocket, IMessage? InMsg)
         {
-            if (TargetSocket == null)
+            if ((InSocket == null) || !InSocket.Connected)
             {
                 Console.WriteLine("无连接，请检查!");
 
                 return;
             }
 
-            NetMsg _msg = new NetMsg { MsgMainId = MainIdEnum, MsgSubId = SubIdEnum };
+            NetMsg _msg = new NetMsg { MsgMainId = InMsgMainId, MsgSubId = InSubId };
 
-            if (TargetMsg != null)
+            if (InMsg != null)
             {
-                _msg.MsgContent = TargetMsg.ToByteString();
+                _msg.MsgContent = InMsg.ToByteString();
             }
 
             byte[] _msgBuffer   = _msg.ToByteArray();
@@ -240,13 +315,19 @@ namespace Server
             using (MemoryStream _ms = new MemoryStream(_finalBuffer))
             {
                 byte[] _lengthBytes = BitConverter.GetBytes(_msgBuffer.Length);
+
+                if (BitConverter.IsLittleEndian)
+                {
+                    Array.Reverse(_lengthBytes);
+                }
+
                 _ms.Write(_lengthBytes);
                 _ms.Write(_msgBuffer);
             }
 
-            TargetSocket.Send(_finalBuffer);
+            InSocket.Send(_finalBuffer);
 
-            Console.WriteLine($"发送消息，Main ID : {MainIdEnum}, SubID : {SubIdEnum}, Content : {TargetMsg}");
+            Console.WriteLine($"发送消息，Main ID : {InMsgMainId}, SubID : {InSubId}, Content : {InMsg}");
         }
     }
 }
