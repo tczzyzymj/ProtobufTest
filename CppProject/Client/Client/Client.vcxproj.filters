@@ -33,6 +33,9 @@
     <ClCompile Include="SourceFiles\NetProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ProtoFiles\Extend.pb.cc">
+      <Filter>ProtoFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ProtoFiles\Core.pb.h">
@@ -46,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="HeadFiles\NetProcessor.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProtoFiles\Extend.pb.h">
+      <Filter>ProtoFiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

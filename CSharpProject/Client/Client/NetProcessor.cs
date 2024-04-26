@@ -12,17 +12,16 @@ namespace Client
     {
         private const    int             mBufferSize = 1024;
         private const    string          mIpAddress  = "127.0.0.1";
-        private const    int             mIntSize    = sizeof(int);
+        private const    int             mSizeOfInt  = sizeof(ulong);
         private readonly byte[]          mBuffer     = new byte[mBufferSize];
         private          IPEndPoint?     mIpEndPoint;
         private          MemoryStream?   mMemoryStream;
-        private          byte[]          mMsgBufferSizeBuffer = new byte[mIntSize];
+        private          byte[]          mMsgBufferSizeBuffer = new byte[mSizeOfInt];
         private          EnumDescriptor? mMsgMainIdDescriptor;
         private          Socket?         mSocket;
 
         public bool Init()
         {
-            mMsgBufferSizeBuffer = new byte[mIntSize];
             mMemoryStream        = new MemoryStream(mBuffer);
             mSocket              = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             mIpEndPoint          = new IPEndPoint(IPAddress.Parse(mIpAddress), 9117);
@@ -81,8 +80,8 @@ namespace Client
 
                     while (true)
                     {
-                        Array.Clear(mMsgBufferSizeBuffer, 0, mIntSize);
-                        mMemoryStream.Read(mMsgBufferSizeBuffer, 0, mIntSize);
+                        Array.Clear(mMsgBufferSizeBuffer, 0, mSizeOfInt);
+                        mMemoryStream.Read(mMsgBufferSizeBuffer, 0, mSizeOfInt);
                         int _msgLength = BitConverter.ToInt32(mMsgBufferSizeBuffer);
 
                         if (_msgLength <= 0)
@@ -158,12 +157,19 @@ namespace Client
                 _msg.MsgContent = InMsg.ToByteString();
             }
 
-            byte[] _msgBuffer   = _msg.ToByteArray();
-            byte[] _finalBuffer = new byte[_msgBuffer.Length + 4];
+            byte[] _msgBuffer       = _msg.ToByteArray();
+            int  _msgBufferLength = _msgBuffer.Length;
+            byte[] _finalBuffer     = new byte[_msgBufferLength + mSizeOfInt];
 
             using (MemoryStream _ms = new MemoryStream(_finalBuffer))
             {
-                byte[] _lengthBytes = BitConverter.GetBytes(_msgBuffer.Length);
+                byte[] _lengthBytes = BitConverter.GetBytes(_msgBufferLength);
+
+                if (BitConverter.IsLittleEndian)
+                {
+                    Array.Reverse(_lengthBytes);
+                }
+
                 _ms.Write(_lengthBytes);
                 _ms.Write(_msgBuffer);
             }

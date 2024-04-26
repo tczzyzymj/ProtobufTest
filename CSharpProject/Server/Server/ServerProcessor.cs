@@ -8,20 +8,18 @@ namespace Server
     public class ServerProcessor
     {
         private const    int                        mBufferSize      = 1024;
+        private const    int                        mSizeOfInt       = sizeof(int);
         private readonly byte[]                     mBuffer          = new byte[mBufferSize];
         private readonly Dictionary<string, Socket> mClientSocketMap = new Dictionary<string, Socket>();
+        private readonly byte[]                     mIntSizeBuffer   = new byte[mSizeOfInt];
         private readonly int                        mPort            = 9117;
-        private          int                        mIntSize         = 4;
         private          MemoryStream?              mMemoryStream;
-        private          byte[]?                    mMsgBufferSizeBuffer;
         private          int                        mReceiveCount;
         private          Socket?                    mServerSocket;
 
         public bool Init()
         {
-            mIntSize             = sizeof(int);
-            mMsgBufferSizeBuffer = new byte[mIntSize];
-            mServerSocket        = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            mServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             mMemoryStream = new MemoryStream(mBuffer);
 
@@ -86,9 +84,10 @@ namespace Server
                 return;
             }
 
-            if (mMsgBufferSizeBuffer == null)
+            if (mIntSizeBuffer == null)
             {
-                Console.WriteLine("mMsgBufferSizeBuffer 为空，请检查");
+                Console.WriteLine("mIntSizeBuffer 为空，请检查");
+
                 return;
             }
 
@@ -104,6 +103,13 @@ namespace Server
 
                 for (int _i = _clientSocketKeyArray.Length - 1; _i >= 0; --_i)
                 {
+                    if (_clientSocketValueArray[_i] == null)
+                    {
+                        mClientSocketMap.Remove(_clientSocketKeyArray[_i]);
+
+                        continue;
+                    }
+
                     if (!_clientSocketValueArray[_i].Connected)
                     {
                         mClientSocketMap.Remove(_clientSocketKeyArray[_i]);
@@ -126,9 +132,17 @@ namespace Server
 
                         while (true)
                         {
-                            Array.Clear(mMsgBufferSizeBuffer, 0, mIntSize);
-                            mMemoryStream.Read(mMsgBufferSizeBuffer, 0, mIntSize);
-                            int _msgLength = BitConverter.ToInt32(mMsgBufferSizeBuffer);
+                            bool _shouldReverseByte = BitConverter.IsLittleEndian;
+
+                            Array.Clear(mIntSizeBuffer, 0, mSizeOfInt);
+                            mMemoryStream.Read(mIntSizeBuffer, 0, mSizeOfInt);
+
+                            if (_shouldReverseByte)
+                            {
+                                Array.Reverse(mIntSizeBuffer);
+                            }
+
+                            int _msgLength = BitConverter.ToInt32(mIntSizeBuffer);
 
                             if (_msgLength <= 0)
                             {
@@ -137,6 +151,7 @@ namespace Server
 
                             byte[] _finalMsgBuffer = new byte[_msgLength];
                             mMemoryStream.Read(_finalMsgBuffer, 0, _msgLength);
+
                             NetMsg? _netMsg = NetMsg.Parser.ParseFrom(_finalMsgBuffer);
 
                             if (_netMsg == null)
@@ -173,7 +188,7 @@ namespace Server
                 }
                 case MsgMainIdEnum.HeatBeat:
                 {
-                    Console.WriteLine("心跳包");
+                    Console.WriteLine("接收心跳包");
 
                     break;
                 }

@@ -178,6 +178,7 @@ xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\$(Configuration)\abseil_dl
     <ClCompile Include="ProtoFiles\Core.pb.cc" />
     <ClCompile Include="ProtoFiles\DailyAsk.pb.cc" />
     <ClCompile Include="ProtoFiles\Define.pb.cc" />
+    <ClCompile Include="ProtoFiles\Extend.pb.cc" />
     <ClCompile Include="SourceFiles\NetProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +186,7 @@ xcopy /y "$(MSBuildProjectDirectory)\ProtoInclude\DLL\$(Configuration)\abseil_dl
     <ClInclude Include="ProtoFiles\Core.pb.h" />
     <ClInclude Include="ProtoFiles\DailyAsk.pb.h" />
     <ClInclude Include="ProtoFiles\Define.pb.h" />
+    <ClInclude Include="ProtoFiles\Extend.pb.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

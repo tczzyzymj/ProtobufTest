@@ -19,7 +19,7 @@ public:
 
     void Close();
 
-    bool SendMsg(MsgMainIdEnum MsgMainIdEnum, INT32 MsgSubIdEnum, google::protobuf::Message &InMsg);
+    void SendMsg(NFProto::MsgMainIdEnum InMsgMainIdEnum, int MsgSubId, google::protobuf::Message* InMsg);
 
     void HandleMsg();
 
@@ -27,4 +27,9 @@ public:
 
 private:
     SOCKET mSocketClient = NULL;
+    u_short mConnectPort = 9117;
+    const int mSizeOfInt = sizeof(int);
+    const bool mIsBigEndian = static_cast<int>(htonl(1) == 1);
+
+    void InternalHandleMsg(NFProto::MsgMainIdEnum InMsgMainIdEnum, int InMsgSubId, std::string& InMsgData);
 };
